@@ -1,5 +1,6 @@
 import React, { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
+import Topbar from "../../components/Topbar";
 import UserSidebar from "../../components/UserSidebar";
 import "../../css/user.css";
 
@@ -11,6 +12,7 @@ function Profile() {
 	);
 	return (
 		<div className="page">
+			<Topbar />
 			<UserSidebar />
 			<div className="body-text">
 				<ul style={{ listStyleType: `none` }}>
