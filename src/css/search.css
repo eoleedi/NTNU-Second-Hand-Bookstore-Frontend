@@ -1,0 +1,14 @@
+.result{
+    display: flex;
+    justify-content: center;
+    /* margin-top: 2%; */
+}
+
+.description{
+    margin-left: 2%;
+    margin-top:50px;
+    font-size: 25px;
+    font-weight: 600;
+    font-family: 'Monospace',Monaco;
+    
+}
