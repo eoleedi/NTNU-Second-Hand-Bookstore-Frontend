@@ -1,9 +1,4 @@
-# NTNU Second Hand Bookstore Frontend
-A Website for Second Hand Bookstore (mainly for students' Textbook Exchange)
-inspired under NTNU Database Course.
-
-
-# Tutorial: Getting Started with Create React App
+# Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
