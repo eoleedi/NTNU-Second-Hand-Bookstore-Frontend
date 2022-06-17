@@ -6,7 +6,7 @@ import {
 	ImageUploaderInput,
 	UploadIconWrapper,
 } from "./ImageUploaderElements";
-function ImageUploader() {
+function ImageUploader(props) {
 	const uploadImage = () => {
 		const r = new XMLHttpRequest();
 		const d = new FormData();
@@ -22,6 +22,7 @@ function ImageUploader() {
 				let res = JSON.parse(r.responseText);
 				u = `https://i.imgur.com/${res.data.id}.png`;
 				console.log(u);
+				props.setImages([u]);
 
 				// const d = document.createElement("div");
 				// d.className = "image";
