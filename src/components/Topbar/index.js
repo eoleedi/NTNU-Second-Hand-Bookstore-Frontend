@@ -33,6 +33,7 @@ function Topbar() {
 	const [errorMsg, setErrorMsg] = useState('');
 	const [notifications_data, setNotification] = useState('');
 	const [searchText, setSearchText] = useState('');
+	const navigate = useNavigate();
 	// notifications_data = []
 	async function fetchNotification() {
 		return fetch("https://ntnu.site/api/member/notifications", {
@@ -99,7 +100,7 @@ function Topbar() {
 				</div>
 				<div class="container-1" >
 					<input type="search" id="search" placeholder="Search..." value={searchText} onChange={(e) => setSearchText(e.target.value)}></input>
-					<button class="icon" onClick={() => { console.log("search") }}><i class="fa fa-search"></i></button>
+					<button class="icon" onClick={() => { navigate("/home?search="+searchText) }}><i class="fa fa-search"></i></button>
 				</div>
 				<button class="icon" onClick={ClickNotification}><IoIosNotifications /></button>
 				<button class="icon"><IoMdPerson /></button>
