@@ -1,0 +1,145 @@
+.box {
+    width: 100%;
+    height: 10vh;
+    background: #F3CDCD;
+    display: flex;
+    align-items: center; 
+    z-index: 0; /* Stay on top */
+	top: 0; /* Stay at the top */
+	left: -1;
+}
+.container-1{
+    /* padding-top: middle; */
+    margin-left: 1rem;
+    margin-right: 0rem;
+    width: 80%;
+    vertical-align: middle;
+    white-space: nowrap;
+    position: relative;
+}
+.container-1 input#search{
+    width: 80%;
+    height: 50px;
+    background: #ffffff;
+    border: none;
+    font-size: 10pt;
+    float: left;
+    color: #262626;
+    padding-left: 15px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+   
+     
+    /* -webkit-transition: background .55s ease;
+    -moz-transition: background .55s ease;
+    -ms-transition: background .55s ease;
+    -o-transition: background .55s ease;
+    transition: background .55s ease; */
+}
+
+.container-1 input#search::-webkit-input-placeholder {
+    color: #65737e;
+}
+  
+.container-1 input#search:-moz-placeholder { /* Firefox 18- */
+    color: #65737e;  
+}
+  
+.container-1 input#search::-moz-placeholder {  /* Firefox 19+ */
+    color: #65737e;  
+}
+  
+.container-1 input#search:-ms-input-placeholder {  
+    color: #65737e;  
+}
+.container-1 button.icon{
+    -webkit-border-top-right-radius: 5px;
+    -webkit-border-bottom-right-radius: 5px;
+    -moz-border-radius-topright: 5px;
+    -moz-border-radius-bottomright: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    
+    border: none;
+    background: white;
+    height: 50px;
+    width: 50px;
+    color: #4f5b66;
+    /* opacity: 0; */
+    font-size: 10pt;
+    margin-left: -50px;
+    margin-right: 1rem;
+    border-radius: 5px;
+    -webkit-transition: all .55s ease;
+    -moz-transition: all .55s ease;
+    -ms-transition: all .55s ease;
+    -o-transition: all .55s ease;
+    transition: all .55s ease;
+  }
+.container-1:hover button.icon, .container-4:active button.icon, .container-4:focus button.icon{
+    /* outline: none; */
+    /* opacity: 1; */
+    margin-left: -50px;
+    margin-right: 1rem;
+}
+
+.container-1:hover button.icon:hover{
+    background: #c7c7c7;
+  }
+
+.container-2 {
+    /* width: 30%; */
+    /* height: 50px; */
+    margin-left: 1rem;
+    margin-right: 1.5rem;
+    /* background: #65737e; */
+    white-space: nowrap;
+    
+}
+
+.container-2 span.title, span.title:hover, span.title:visited{
+    font-size: 2em;
+    text-decoration:none;
+    color: #262626;
+    text-align: center;
+}
+
+
+.container-2 button img.title_icon {
+    height:"100%";
+    width:"35px";
+    color: #262626;
+    /* height: 5; */
+}
+
+.icon {
+    margin-left: 0.5rem;
+    margin-right: 1rem;
+    border: none;
+    background: none;
+    width: 50px;
+    height: 50px;
+    font-size: 2.5rem;
+}
+
+.notification {
+    position: absolute;
+    opacity: 1;
+    top: 10vh;
+    right: 5vh;
+    width: 40vh;
+    height: 50vh;
+    border-style: outset;
+    border-width:2px;
+    background: #e5e5e5;
+    overflow-y: auto;
+    
+}
+
+.notis {
+    width: 100%;
+    height: 100px;
+    margin-bottom: 3px;
+    background: #ffffff;
+}
