@@ -6,7 +6,7 @@ class UserSidebar extends React.Component {
 		let style_profile = {
 			background: "#F3CDCD",
 		};
-		let style_collection = {
+		let style_list = {
 			background: "#CEBDBD",
 		};
 		let style_product = {
@@ -20,7 +20,7 @@ class UserSidebar extends React.Component {
 						<NavLink to="/user/profile" style={style_profile}>
 							基本資料
 						</NavLink>
-						<NavLink to="/user/collection" style={style_collection}>
+						<NavLink to="/user/list" style={style_list}>
 							商品相關
 						</NavLink>
 						<NavLink to="/user/product" style={style_product}>
