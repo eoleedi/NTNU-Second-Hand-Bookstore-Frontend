@@ -1,0 +1,110 @@
+
+.MainContainer {
+    padding: 2% 5%;
+    margin-top: 100px;
+    /* box-sizing: border-box; */
+    /* background-size: contain; */
+    /* width: 100%; */
+    display: flex;
+    vertical-align: middle;
+    justify-content: center;
+    
+  }
+
+.ProductPreview {
+    width: 20%;
+    padding: 2% ;
+    /* justify-content: right; */
+    /* display: flex;
+    justify-content: center; */
+    /* position:inherit; */
+    
+}
+
+
+.ProductTitle {
+    margin-bottom: 10px;
+    width: 100%;
+    padding: 5% 1% ;
+    font-size: 25px;
+    font-weight: 600;
+    font-family: 'Monospace',Monaco;
+    justify-content: left;
+}
+
+.ProductDescription{
+    /* padding: 1% ; */
+    margin-bottom: 20px;
+    font-size: 16px;
+    font-family: 'Monospace',Monaco;
+    display: flex;
+    justify-content: left;
+}
+.LikeAndViewDescription{
+    margin-top: 2px;
+    display: flex;
+    justify-content: center;
+}
+
+
+.Feature{
+    
+    min-width: 80px;
+    background-color: gainsboro;
+    border-radius: 8px;
+    border: 0;
+    
+    margin-bottom: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+    box-sizing: content-box;
+    font-weight: 600;
+    padding: 12px 24px;
+    
+    
+}
+
+/* change like button color */
+.ChangeLike{
+    min-width: 80px;
+    background-color: rgb(236, 189, 189);
+    border-radius: 8px;
+    border: 0;
+    
+    margin-bottom: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+    box-sizing: content-box;
+    font-weight: 600;
+    padding: 12px 24px;
+}
+/* change button color */
+.ChangeBuy{
+    min-width: 80px;
+    background-color: rgb(176, 223, 239);
+    border-radius: 8px;
+    border: 0;
+    
+    margin-bottom: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+    box-sizing: content-box;
+    font-weight: 600;
+    padding: 12px 24px;
+}
+
+.LikesAndViews{
+    /* display: inline-block; */
+    width: 45px;
+    
+}
+
+.Button{
+    display: flex;
+    justify-content: center;
+    
+}
+/* .SelectedFeature{
+    color: white;
+    background-color: gray;
+} */
