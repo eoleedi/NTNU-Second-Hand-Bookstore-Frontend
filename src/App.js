@@ -15,6 +15,7 @@ import Password from "./pages/user/password";
 import EditProfile from "./pages/user/edit";
 import EditProduct from "./pages/user/editProduct";
 import ImageUploader from "./components/ImageUploader";
+import NewProduct from "./pages/user/newProduct";
 function App() {
 	return (
 		<div>
@@ -28,6 +29,7 @@ function App() {
 						<Route path="product" element={<Product />} />
 						<Route path="list" element={<List />} />
 						<Route path="editproduct" element={<EditProduct />} />
+						<Route path="newproduct" element={<NewProduct />} />
 					</Route>
 					<Route path="test" element={<ImageUploader />} />
 				</Routes>
