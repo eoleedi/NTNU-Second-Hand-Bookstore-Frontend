@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import Topbar from "../components/Topbar";
 // import React, { useCallback } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 // import UserSidebar from "../../components/UserSidebar";
 import "../css/login.css";
 
@@ -14,40 +14,46 @@ function login() {
 	const [username, setUsername] = useState('');
 	const [password, setPassword] = useState('');
 	const [errorMsg, setErrorMsg] = useState('');
-	async function signin () {
+	const navigate = useNavigate();
+	async function loginFetch() {
 		if (!username) {
 			setErrorMsg('請輸入帳號');
-			return;
+			return alert(errorMsg);
 		}
 		if (!password) {
 			setErrorMsg('請輸入密碼');
-			return;
+			return alert(errorMsg);
 		}
-		console.log("here")
-		let body = {
-			"username": username,
-			"passowrd": password
-		}
-		await fetch("https://ntnu.site/api/auth/session", {
-		  method: "POST",
-		  headers: {
-			'Content-Type': 'application/json'
-		  },
-		  mode: "no-cors",
-		  body: JSON.stringify(body),
+		return fetch("https://ntnu.site/api/auth/session", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			credentials: "include",
+			body: JSON.stringify({
+				username: username,
+				password: password,
+			}),
 		})
-		.then((response) => {
-			// 這裡會得到一個 ReadableStream 的物件
-			console.log(response);
-		})
-		.catch((error) => console.log(error));
+			.then((response) => {
+				if (!response.status === 200) {
+					throw new Error(response.statusText);
+				}
+				if (response.status === 200) {
+					navigate("../");
+				}
+				console.log(response);
+			})
+			.catch((error) => {
+				console.log(error);
+				alert(errorMsg);
+			});
 	}
 	return (
 		<div class="page">
 			<div class="outer">
 				<Topbar />
 				<div class="login-form">
-					<form id="login-form">
 						<h1>Login</h1>
 						<div class="content">
 						<div class="input-field">
@@ -59,10 +65,9 @@ function login() {
 						{/* <a href="#" class="link">Forgot Your Password?</a> */}
 						</div>
 						<div class="action">
-						<button>Register</button>
-						<button onClick={signin}>Sign in</button>
+						<button onClick={() => navigate("../register")}>Register</button>
+						<button onClick={loginFetch}>Sign in</button>
 						</div>
-					</form>
 				</div>
 			</div>
 		</div>

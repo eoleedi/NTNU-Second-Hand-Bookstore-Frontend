@@ -78,8 +78,8 @@
     transition: all .55s ease;
   }
 .container-1:hover button.icon, .container-4:active button.icon, .container-4:focus button.icon{
-    outline: none;
-    opacity: 1;
+    /* outline: none; */
+    /* opacity: 1; */
     margin-left: -50px;
     margin-right: 1rem;
 }
@@ -123,3 +123,23 @@
     font-size: 2.5rem;
 }
 
+.notification {
+    position: absolute;
+    opacity: 1;
+    top: 10vh;
+    right: 5vh;
+    width: 40vh;
+    height: 50vh;
+    border-style: outset;
+    border-width:2px;
+    background: #e5e5e5;
+    overflow-y: auto;
+    
+}
+
+.notis {
+    width: 100%;
+    height: 100px;
+    margin-bottom: 3px;
+    background: #ffffff;
+}
