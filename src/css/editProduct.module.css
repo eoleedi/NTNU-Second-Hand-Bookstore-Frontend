@@ -1,0 +1,11 @@
+.container{
+    display:flex;
+    margin: 40px;
+}
+.panel {
+    flex: 1;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}

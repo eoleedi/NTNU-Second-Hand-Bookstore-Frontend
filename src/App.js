@@ -9,8 +9,12 @@ import {
 
 import Profile from "./pages/user/profile";
 import Product from "./pages/user/product";
-import Collection from "./pages/user/collection";
+import List from "./pages/user/list";
 import User from "./pages/user/index";
+import Password from "./pages/user/password";
+import EditProfile from "./pages/user/edit";
+import EditProduct from "./pages/user/editProduct";
+import ImageUploader from "./components/ImageUploader";
 function App() {
 	return (
 		<div>
@@ -19,9 +23,13 @@ function App() {
 					<Route path="/user" element={<User />}>
 						<Route index element={<Navigate to="profile" />} />
 						<Route path="profile" element={<Profile />} />
+						<Route path="edit" element={<EditProfile />} />
+						<Route path="password" element={<Password />} />
 						<Route path="product" element={<Product />} />
-						<Route path="collection" element={<Collection />} />
+						<Route path="list" element={<List />} />
+						<Route path="editproduct" element={<EditProduct />} />
 					</Route>
+					<Route path="test" element={<ImageUploader />} />
 				</Routes>
 			</Router>
 		</div>
