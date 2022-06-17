@@ -2,28 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import UserSidebar from "../../components/UserSidebar";
 import "../../css/user.css";
-async function loginFetch() {
-	return fetch("https://ntnu.site/api/auth/session", {
-		method: "POST",
-		headers: {
-			"Content-Type": "application/json",
-		},
-		credentials: "include",
-		body: JSON.stringify({
-			username: "test001",
-			password: "amdmmnwox",
-		}),
-	})
-		.then((response) => {
-			if (!response.status === 200) {
-				throw new Error(response.statusText);
-			}
-			console.log(response);
-		})
-		.catch((error) => {
-			console.log(error);
-		});
-}
 function Profile() {
 	const [profile, setProfile] = useState(null);
 	const navigate = useNavigate();
