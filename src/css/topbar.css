@@ -98,7 +98,7 @@
     
 }
 
-.container-2 a.title, a.title:hover, a.title:visited{
+.container-2 span.title, span.title:hover, span.title:visited{
     font-size: 2em;
     text-decoration:none;
     color: #262626;

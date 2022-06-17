@@ -95,15 +95,15 @@ function Topbar() {
 		<>
 			<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"></link>
 			<div class="box">
-				<div class="container-2">
-					<a class="title" href="#"><img src="../../logo192.png" width="35px" color="#262626"></img>二手書交易平台</a>
+				<div class="container-2" onClick={() => {navigate("/home")}}>
+					<span class="title"><img src="../../logo192.png" width="35px" color="#262626"></img>二手書交易平台</span>
 				</div>
 				<div class="container-1" >
 					<input type="search" id="search" placeholder="Search..." value={searchText} onChange={(e) => setSearchText(e.target.value)}></input>
 					<button class="icon" onClick={() => { navigate("/home?search="+searchText) }}><i class="fa fa-search"></i></button>
 				</div>
 				<button class="icon" onClick={ClickNotification}><IoIosNotifications /></button>
-				<button class="icon"><IoMdPerson /></button>
+				<button class="icon" onClick={() => {navigate("/user/profile")}}><IoMdPerson /></button>
 				<div id='notification' class='notification'>
 					{getNotification()}
 				</div>
