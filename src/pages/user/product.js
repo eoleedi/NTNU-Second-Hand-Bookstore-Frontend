@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import UserSidebar from "../../components/UserSidebar";
 import "../../css/user.css";
+
+
 function Product() {
 	const [forSaleProducts, setForSaleProducts] = useState([]);
 	const [editingProducts, setEditingProducts] = useState([]);
@@ -45,5 +47,6 @@ function Product() {
 		</div>
 	);
 }
+
 
 export default Product;

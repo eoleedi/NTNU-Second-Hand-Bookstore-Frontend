@@ -26,15 +26,13 @@ import "../../css/topbar.css";
 // }
 
 
-
-
-
 function Topbar() {
-	const [errorMsg, setErrorMsg] = useState('');
-	const [notifications_data, setNotification] = useState('');
+
+	// const [errorMsg, setErrorMsg] = useState('');
+	const [notificationsData, setNotification] = useState('');
 	const [searchText, setSearchText] = useState('');
 	const navigate = useNavigate();
-	// notifications_data = []
+
 	async function fetchNotification() {
 		return fetch("https://ntnu.site/api/member/notifications", {
 			method: "GET",
@@ -43,24 +41,21 @@ function Topbar() {
 			},
 			credentials: "include",
 		})
+			.then((response) => response.json())
 			.then((response) => {
-				if (!response.status === 200) {
-					throw new Error(response.statusText);
+				if (response.status != "ok") {
+					alert(response.message)
 				}
-				console.log(response);
-				return response.json()
-			})
-			.then((jsonData) => {
-				console.log(jsonData['data']['notifications'])
-				// setNotification([])
-				setNotification(jsonData['data']['notifications'])
-				// notifications_data = jsonData['data']['notifications']
+				else {
+					setNotification(response.data.notifications)
+				}
 			})
 			.catch((error) => {
 				console.log(error);
 				// alert(errorMsg);
 			});
 	}
+
 	function ClickNotification() {
 		if (document.getElementById('notification').style.display == 'none') {
 			document.getElementById('notification').style.display = ''
@@ -75,13 +70,13 @@ function Topbar() {
 		fetchNotification()
 		var notification_div = <div class='notis'> </div>
 		var notis = []
-		console.log("noifications:" + notifications_data)
+		console.log("noifications:" + notificationsData)
 		// if(notifications_data) {
 			// notifications_data.array.forEach(element => {
 			// 	notis.push(notification_div)
 			// });
 		// }
-		for (var i = 0; i < notifications_data.length; i++) {
+		for (var i = 0; i < notificationsData.length; i++) {
 			// if(notis == null)
 			// 	notis = notification_div
 			// else
@@ -92,23 +87,23 @@ function Topbar() {
 	}
 
 	return (
-		<>
+		<div class="box">
 			<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"></link>
-			<div class="box">
-				<div class="container-2" onClick={() => {navigate("/home")}}>
-					<span class="title"><img src="../../logo192.png" width="35px" color="#262626"></img>二手書交易平台</span>
-				</div>
-				<div class="container-1" >
-					<input type="search" id="search" placeholder="Search..." value={searchText} onChange={(e) => setSearchText(e.target.value)}></input>
-					<button class="icon" onClick={() => { navigate("/home?search="+searchText) }}><i class="fa fa-search"></i></button>
-				</div>
-				<button class="icon" onClick={ClickNotification}><IoIosNotifications /></button>
-				<button class="icon" onClick={() => {navigate("/user/profile")}}><IoMdPerson /></button>
-				<div id='notification' class='notification'>
-					{getNotification()}
-				</div>
+			<div class="container-2" onClick={() => {navigate("/home")}}>
+				<span class="title"><img src="../../logo192.png" width="35px" color="#262626"></img>二手書交易平台</span>
 			</div>
-		</>
+			<div class="container-1" >
+				<input type="search" id="search" placeholder="Search..." value={searchText} onChange={(e) => setSearchText(e.target.value)}></input>
+				<button class="icon" onClick={() => { navigate("/search?keyword="+searchText) }}><i class="fa fa-search"></i></button>
+			</div>
+			<button class="icon" onClick={ClickNotification}><IoIosNotifications /></button>
+			<button class="icon" onClick={() => {navigate("/user/profile")}}><IoMdPerson /></button>
+			{/* <div id='notification' class='notification'>
+				{getNotification()}
+			</div> */}
+		</div>
 	);
 }
+
+
 export default Topbar;

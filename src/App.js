@@ -1,12 +1,18 @@
+import "./App.css";
 import React from 'react';
 import Navbar from './components/Navbar';
-import { BrowserRouter as Router, Routes, Route}
-    from 'react-router-dom';
+import {
+	BrowserRouter as Router,
+	Routes,
+	Route,
+	Navigate,
+} from "react-router-dom";
 import Home from './pages/home';
 import About from './pages/rule';
 import Contact from './pages/FAQ';
 import Search from './pages/search';
 import ProductDetail from './pages/productdetail';
+import Topbar from "./components/Topbar";
 import Profile from "./pages/user/profile";
 import Product from "./pages/user/product";
 import List from "./pages/user/list";
@@ -26,6 +32,7 @@ function App() {
 	return (
 		<div>
 			<Router>
+				<Topbar />
 				<Routes>
 					<Route path="/user" element={<User />}>
 						<Route index element={<Navigate to="profile" />} />
