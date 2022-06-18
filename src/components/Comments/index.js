@@ -1,74 +1,96 @@
 import React, { useState } from 'react';
 import {faComment} from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-
-import {
-    ChakraProvider,
-    FormControl,
-    FormLabel,
-    Input,
-    Button,
-  } from '@chakra-ui/react'
-
+import "../../css/ProductStyle.css"
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
 
 
-const Comment = ({productId}) => {
-    const[content, setContent] = useState();
 
-    const handleComment= async(e) =>{
-        e.preventDefault();
-        console.log("===");
-        console.log(content);
-        try{
-            const response = await fetch(`https://ntnu.site/api/product/like`,{
-                method:'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                mode: "cors",
-                credentials:"include",
-                body: JSON.stringify({
-                    productId: productId,
-                    comment:content,
-                }), 
+
+const Comment = ({productId, NewData,addcom,setAddcom}) => {
+    const[content, setContent] = useState('');
+
+    async function handleComment() {
+        // console.log(String(content))
+        return fetch(`https://ntnu.site/api/product/comment`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            mode: "cors",
+            credentials:"include",
+            body: JSON.stringify({
+                productId: Number(productId),
+                content:content,
+            }),
+        })
+            .then((response) => response.json())
+            .then((response) => {
+                if (response.status !== "ok") {
+                    alert(response.message);
+                }
+                else{
+                    alert("新增留言成功!");
+                    setAddcom(!addcom);
+                    
+                }
+            })
+            .catch((error) => {
+                console.log(error);
             });
-            const json = await response.json();
-            console.log(json);
-            
-        }catch(error){
-            console.log("error",error);
-        }
-        //check valid user
-        //e.preventDefault();
+    
+    }
         
-    };
-   
+    
+//    console.log({NewData})
     return (
-        <ChakraProvider>
-            
-            <form >
-                <FormControl>
-                    <FormLabel htmlFor='content'>
-                        Leave some comments if you have any question! &nbsp;
-                        <FontAwesomeIcon icon={faComment}/>
-                    </FormLabel>
-                    <Input 
+        <div>
+            <form >                    
+                <h3 style={{marginTop:"-20px"}}>Leave some comments below if you have any question! &nbsp;<FontAwesomeIcon icon={faComment}/></h3>
+                    
+                <div class="input-field">
+                    <input 
                         type='text'
-                        id={productId}  
+                        id="comments-input"
                         value={content}
                         onChange={(e) => setContent(e.target.value)}
-                        // aria-describedby='content-helper-text'
                         placeholder='some comment...'
                     />
-                    {/* <FormHelperText>We'll never share your email.</FormHelperText> */}
-                </FormControl>
-                <Button  onClick={(e)=>handleComment(e)}> Add comment</Button>
+                </div>
+                <button className='Feature' onClick={handleComment}> Add comment</button>
             </form>
-            
-            
-        </ChakraProvider>
-        
-        
+            <TableContainer sx={{height: 200,overflowX: "hidden"}}>
+                <Table stickyHeader sx={{ height: "max-content",minWidth: 650 }} size="small" aria-label="a dense table">
+                    <TableHead>
+                    <TableRow>
+                        <TableCell>User Name</TableCell>
+                        <TableCell align="right">Content</TableCell>
+                        <TableCell align="right">Comment Time</TableCell>
+                    </TableRow>
+                    </TableHead>
+                    <TableBody>
+                    {NewData.comments.map((comments) => (
+                        <TableRow
+                        key={[comments.commentTime,comments.displayName]}
+                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                        >
+                        <TableCell component="th" scope="row">
+                            {comments.displayName}
+                        </TableCell>
+                        <TableCell align="right">{comments.content}</TableCell>
+                        <TableCell align="right">{comments.commentTime}</TableCell>
+                        
+                        </TableRow>
+                    ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>          
+        </div>
     );
 };
   

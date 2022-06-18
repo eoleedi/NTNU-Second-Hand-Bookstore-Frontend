@@ -1,10 +1,10 @@
 import React, {useEffect, useState}  from 'react';
-import {useParams} from "react-router-dom";
+import {useParams, useNavigate} from "react-router-dom";
 import "../../css/ProductStyle.css";
 import Carousel from "../../components/Carousel"
+import Topbar from "../../components/Topbar";
 import { FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faEye, faBagShopping, faHeart} from '@fortawesome/free-solid-svg-icons'
-// // import CommentList from './components/Comments/CommentList';
+import {faEye, faBagShopping,faThumbsDown, faThumbsUp} from '@fortawesome/free-solid-svg-icons'
 import Comment from '../../components/Comments';
 
 
@@ -15,36 +15,10 @@ const ProductDetail = () =>  {
     const [loading, setLoading] = useState(false);
     const [loadnew,setLoadnew] = useState(true);
     const [NewData, setNewData] = useState([]);
-    // const [count,setCount] = useState(0);
     const [like,setLike] = useState(false);
-    const [buy,setBuy] = useState(false);
-    
-    //add new data to db
-    // const handleCount= async() =>{
-    //     try{
-    //         setCount(count+1);
-    //         const response = await fetch(`https://ntnu.site/api/product/like`,{
-    //             method:'POST',
-    //             headers: {
-    //                 'Content-Type': 'application/json',
-    //             },
-    //             mode: "cors",
-    //             credentials:"include",
-    //             body: JSON.stringify({
-    //                 productId: productId,
-    //                 likes: count,
-    //             }), 
-    //         });
-    //         const json = await response.json();
-    //         console.log(json);
-            
-    //     }catch(error){
-    //         console.log("error",error);
-    //     }
-    //     //check valid user
-    //     //e.preventDefault();
-        
-    // };
+    // const [buy,setBuy] = useState(false);
+    const [addcom, setAddcom] = useState(false);
+    const navigate = useNavigate();
     
     
     //get productdata
@@ -62,7 +36,7 @@ const ProductDetail = () =>  {
                     credentials:"include",
                 });
                 const json = await response.json();
-                console.log('json: ',json);
+                // console.log('json: ',json);
                 setProductData((json.data.details));
                 setLoading(false);
                 // console.log("fetch finish")
@@ -72,7 +46,7 @@ const ProductDetail = () =>  {
         };
         fetchData();
         // eslint-disable-next-line
-    },[])
+    },[like,addcom])
 
     
 
@@ -89,9 +63,9 @@ const ProductDetail = () =>  {
         if(Object.keys(NewData).length !== 0 )
         {
             setLoadnew(false) 
-            console.log("load finish")
+            // console.log("load finish")
         }
-        console.log(NewData)
+        // console.log(NewData)
         // eslint-disable-next-line
     },[ProductData,loading])
 
@@ -102,27 +76,116 @@ const ProductDetail = () =>  {
     else
         Noted = "無"
     
-    const label = like? 'Unlike':'Like'
 
 
-    const handleLike=()=> {
-        setLike(preState => !preState)
+
+    async function handleLike() {
+            return fetch(`https://ntnu.site/api/product/like`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                mode: "cors",
+                credentials:"include",
+                body: JSON.stringify({
+                    productId: Number(productId),
+                }),
+            })
+                .then((response) => response.json())
+                .then((response) => {
+                    if (response.status !== "ok") {
+                        alert(response.message);
+                    }
+                    else{
+                        setLike(preState => !preState);
+                        alert("收藏商品成功!");
+                    }
+                    if(response.message === "Not logged in.")
+                        navigate("../login");
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        
     }
-    const handleBuy=() => {
-        setBuy(preState => !preState)
-    }
+
+    async function handleUnlike() {
+        return fetch(`https://ntnu.site/api/product/like`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            mode: "cors",
+            credentials:"include",
+            body: JSON.stringify({
+                productId: Number(productId),
+            }),
+        })
+            .then((response) => response.json())
+            .then((response) => {
+                if (response.status !== "ok") {
+                    // throw new Error(response.statusText);
+                    alert(response.message);
+                }
+                else{
+                    setLike(preState => !preState);
+                    alert("刪除收藏商品成功!");
+                }
+                if(response.message === "Not logged in.")
+                    navigate("../login");
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     
+    }
 
+    async function handleBuy()  {
+        return fetch(`https://ntnu.site/api/product/order`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                mode: "cors",
+                credentials:"include",
+                body: JSON.stringify({
+                    productId: Number(productId),
+                }),
+            })
+                .then((response) => response.json())
+                .then((response) => {
+                    if (response.status !== "ok") {
+                        // setBuy(true)
+                        alert(response.message);
+                    }
+                    else{
+                        // setBuy(true)
+                        alert("購買(預訂)成功，請確認通知!");
+                    }
+                })
+                .catch((error) => {
+                    console.log(error);
+                });
+        }
     
 
     if (loadnew){
-        return <h2>Loading...</h2>
+        
+        return (
+            <div>
+                <Topbar />      
+                <h2>Loading...</h2>
+            </div>
+        )
         
       }
     else    
     {
         return (
-                <div className="MainContainer" style={{ maxWidth: 1500, marginLeft: 60,marginBottom: 10}}>
+            <div>
+                <Topbar />   
+                <div className="MainContainer" >
+                    
                     <div className="ProductPreview" >
                         {/* <img src=  {NewData.images[0]} style={{width:200}}  alt="" ></img> */}
                         <Carousel show={1} >
@@ -135,12 +198,12 @@ const ProductDetail = () =>  {
                         </Carousel >
                         
                         <div className='LikeAndViewDescription'  >
-                            <FontAwesomeIcon icon={faHeart} className="LikesAndViews"/>{NewData.likes}
+                            <FontAwesomeIcon icon={faThumbsUp} className="LikesAndViews"/>{NewData.likes}
                             <FontAwesomeIcon icon={faEye} className="LikesAndViews" />{NewData.views}
                         </div>
                     </div>  
                     
-                    <div style={{Width: 300,marginLeft: 100, marginTop: 20}}>
+                    <div className="Word">
                         <h1 className="ProductTitle"> {NewData.name}</h1>
                         <h2 className="ProductTitle">${NewData.price}</h2>
                         <p className="ProductDescription">
@@ -153,19 +216,23 @@ const ProductDetail = () =>  {
                         </p>
                         
                         <div className='Button' >
-                            <button onClick={handleLike} className={like?'ChangeLike':'Feature'} >
-                                <FontAwesomeIcon icon={faHeart} />&nbsp;{label}
+                            <button onClick={handleLike} className='Feature' >
+                                <FontAwesomeIcon icon={faThumbsUp} />&nbsp;Like
                             </button>
-                            <button onClick={handleBuy} className={buy?'ChangeBuy':'Feature'}>
+                            <button onClick={handleUnlike} className='Feature' >
+                                <FontAwesomeIcon icon={faThumbsDown} />&nbsp;Unlike
+                            </button>
+                            <button onClick={handleBuy} className='Feature'>
                                 <FontAwesomeIcon icon={faBagShopping} />&nbsp;Buy
                             </button>
                         </div>
                     </div>
-                    <div style={{width:"30%",marginLeft: 100,marginTop: 20}}>
-                        
-                        <Comment productId={productId}/>
-                    </div>
+                    
                 </div>
+                <div className='CommentArea' >
+                 <Comment productId={productId} NewData={NewData} addcom={addcom} setAddcom={setAddcom}/>       
+                </div>
+            </div>
                 
                 
         )

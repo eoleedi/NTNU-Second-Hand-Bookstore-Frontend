@@ -8,11 +8,17 @@ const Navbar = () => {
   
       <Nav  >
         <NavMenu>
-          <NavLink to="/about" end>
+          <NavLink to="/rules" end>
             平台規範
           </NavLink>
-          <NavLink to="/contact" end>
+          <NavLink to="/FAQ" end>
             FAQ
+          </NavLink>
+          <NavLink to="/contact" end>
+            聯絡資訊
+          </NavLink>
+          <NavLink to="/about" end>
+            關於平台
           </NavLink>
         </NavMenu>
       </Nav>
