@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 // import UserSidebar from "../../components/UserSidebar";
 import "../css/login.css";
 
-function login() {
+function Login() {
 	// const navigate = useNavigate();
 	// const handleOnClickEdit = useCallback(() => navigate("edit"));
 	// const handleOnClickResetPassword = useCallback(() =>
@@ -29,6 +29,7 @@ function login() {
 			headers: {
 				"Content-Type": "application/json",
 			},
+            // mode: "cors",
 			credentials: "include",
 			body: JSON.stringify({
 				username: username,
@@ -76,4 +77,4 @@ function login() {
 
 
 
-export default login;
+export default Login;

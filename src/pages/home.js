@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
 import Announcement from "../components/Announcement"
 import Carousel from "../components/Carousel"
+import Topbar from "../components/Topbar";
 import "../css/imagestyle.css"; //align picture
 
 // http://localhost:3000/productarray  //json : local data test slider
@@ -14,7 +15,7 @@ const Home = () => {
   useEffect(() => {
     const fetchData = async() =>{
       try{
-          const response = await fetch(`http://localhost:3000/productarray`,{
+          const response = await fetch(`https://ntnu.site/api/product`,{
               method:'GET',
               headers: {
                   'Content-Type': 'application/json',
@@ -23,8 +24,8 @@ const Home = () => {
               credentials:"include",
           });
           const json = await response.json();
-          // console.log(json);
-          setProductData((json));
+          console.log(json);
+          setProductData((json.data.products));
           
       }catch(error){
           console.log("error",error);
@@ -37,8 +38,8 @@ const Home = () => {
   return (
 
     <div>
-      
-      <Link to="/products/search">go to search result page</Link>
+      <Topbar />
+      {/* <Link to="/products/search">go to search result page</Link> */}
       <br/>
                  
       <div style={{ marginTop: 60, marginLeft: 310, height: 50}}>

@@ -3,6 +3,7 @@ import { IoIosNotifications, IoMdPerson } from "react-icons/io"
 import { useNavigate } from "react-router-dom";
 // import { Nav, NavLink, NavMenu, PersonIcon } from "./TopBarElements";
 import "../../css/topbar.css";
+// import Search from '../../pages/search';
 
 // class Topbar extends React.Component {
 // 	render() {
@@ -72,7 +73,7 @@ function Topbar() {
 	}
 	
 	function getNotification() {
-		fetchNotification()
+		//fetchNotification()
 		var notification_div = <div class='notis'> </div>
 		var notis = []
 		console.log("noifications:" + notifications_data)
@@ -100,7 +101,7 @@ function Topbar() {
 				</div>
 				<div class="container-1" >
 					<input type="search" id="search" placeholder="Search..." value={searchText} onChange={(e) => setSearchText(e.target.value)}></input>
-					<button class="icon" onClick={() => { navigate("/home?search="+searchText) }}><i class="fa fa-search"></i></button>
+					<button class="icon" onClick={() => { navigate(`/products/search/${searchText}`) }}><i class="fa fa-search"></i></button>
 				</div>
 				<button class="icon" onClick={ClickNotification}><IoIosNotifications /></button>
 				<button class="icon" onClick={() => {navigate("/user/profile")}}><IoMdPerson /></button>

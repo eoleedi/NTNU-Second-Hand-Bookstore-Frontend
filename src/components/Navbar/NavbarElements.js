@@ -3,9 +3,9 @@ import styled from "styled-components";
   
 export const Nav = styled.nav`
   background: #D9D9D9;
-  position: fixed;
-  top: 690px;
-  margin-top: 10px;
+  // position: fixed;
+  top: 700px;
+  margin-top: 20px;
   height: 40px;
   width: 100%;
   display: flex;
@@ -25,7 +25,7 @@ export const NavLink = styled(Link)`
   justify-content: flex-start;
   cursor: pointer;
   &.active {
-    color: #4d4dff;
+    color: #642100;
   }
 `;
   

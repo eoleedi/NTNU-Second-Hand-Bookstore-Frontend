@@ -1,11 +1,14 @@
 import React, {useEffect, useState} from 'react';
+import {useParams} from "react-router-dom";
 import { ChakraProvider } from '@chakra-ui/react'
 import { FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import {faBookOpenReader} from '@fortawesome/free-solid-svg-icons'
 import "../../css/search.css";
+import Topbar from "../../components/Topbar";
 import Page from '../../components/SearchPage';
 import Pagination from '../../components/SearchPage/Pagination';
 const Search = () => {
+  const {searchText} = useParams();
   const [Product, setProduct] = useState([]);
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -16,18 +19,20 @@ const Search = () => {
     const fetchData = async() =>{
       try{
           setLoading(true);
-          //先用自己的資料測試，因為搜尋功能api是POST
-          const response = await fetch(`http://localhost:3000/productarray`,{
-              method:'GET',
+          const response = await fetch(`https://ntnu.site/api/product/search`,{
+              method:'POST',
               headers: {
                   'Content-Type': 'application/json',
               },
               mode: "cors",
               credentials:"include",
-          });
+              body: JSON.stringify({
+                keywords:searchText ,
+            }),
+          })
           const json = await response.json();
           // console.log(json);
-          setProduct(json);
+          setProduct(json.data.products);
           setLoading(false);
           
       }catch(error){
@@ -35,7 +40,7 @@ const Search = () => {
       }
   };
   fetchData();
-  },[]) ;
+  },[searchText]) ;
 
   // get current posts
   const indexOfLastPost = currentPage* postsPerPage;
@@ -47,8 +52,9 @@ const Search = () => {
 
   return (
     <ChakraProvider>
+    <Topbar/>
     <div className='description'>
-      <p >search result&nbsp;<FontAwesomeIcon icon={faBookOpenReader} />&nbsp;...</p>
+      <p >search result for "{searchText}" &nbsp;<FontAwesomeIcon icon={faBookOpenReader} />&nbsp;...</p>
       
     </div>
     

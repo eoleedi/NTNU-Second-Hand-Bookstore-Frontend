@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 // import UserSidebar from "../../components/UserSidebar";
 import "../css/login.css";
 
-function register() {
+function Register() {
 	// const navigate = useNavigate();
 	// const handleOnClickEdit = useCallback(() => navigate("edit"));
 	// const handleOnClickResetPassword = useCallback(() =>
@@ -44,7 +44,7 @@ function register() {
 			setErrorMsg('請輸入手機');
 			return alert(errorMsg);
 		}
-		if (password != repassword) {
+		if (password !== repassword) {
 			setErrorMsg('請重複輸入相同密碼');
 		}
 		return fetch("https://ntnu.site/api/auth/register", {
@@ -52,13 +52,14 @@ function register() {
 			headers: {
 				"Content-Type": "application/json",
 			},
+            // mode: "cors",
 			credentials: "include",
 			body: JSON.stringify({
 				username: username,
 				password: password,
 				displayName: displayName,
 				email: email,
-				phone, phone
+				phone: phone,
 			}),
 		})
 			.then((response) => {
@@ -114,4 +115,4 @@ function register() {
 	);
 }
 
-export default register;
+export default Register;
