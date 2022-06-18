@@ -147,4 +147,5 @@ class EditProduct extends React.Component {
 	}
 }
 
+
 export default EditProduct;

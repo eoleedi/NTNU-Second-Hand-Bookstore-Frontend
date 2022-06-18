@@ -30,7 +30,7 @@ function Profile() {
 	}, []);
 
 	return (
-		<div className="page">
+		<div className="member-page">
 			<UserSidebar />
 			<div className="body-text">
 				{profile && (

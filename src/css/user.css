@@ -1,14 +1,22 @@
-.page{
+.member-page {
     display: flex;
-    height: 100vh;
+    height: 90vh;
     justify-content: center;
 }
-.page > div{
+.member-page > div{
     flex: 1;
 }
 
-.body-text{
-    padding: 8rem 3rem 3rem 11rem;
+.body-text {
+    padding: 1rem 3rem 1rem 3rem;
     font-size: 30px;
-    line-height: 3em;
+    line-height: 2em;
+}
+
+Table {
+    font-size: 18px;
+}
+
+tr {
+    line-height: 1.5em;
 }
