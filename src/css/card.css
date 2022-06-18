@@ -1,0 +1,61 @@
+.card{
+    border-style:solid;
+    border-width: 1px;
+    border-color:rgb(215, 212, 212);
+}
+
+.card .card-content {
+    color: rgba(0, 0, 0, 0.54);
+    font-size: 12px;
+    text-align:center;
+}
+
+.card .card-separator {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.card .card-header .card-header-caption {
+-ms-flex-item-align: center;
+    align-self: center;
+display: -ms-flexbox;
+display: flex;
+-ms-flex: 1;
+    flex: 1;
+-ms-flex-direction: column;
+    flex-direction: column;
+overflow: hidden;
+padding: 0 0 0 12px;
+font-size: 15px;
+}
+
+/* for FAQ , rules, Contact and about */
+.card-FR{
+    border-style:dashed;
+    border-color:rgb(215, 212, 212);
+}
+
+.card-FR .card-content-FR{
+    color: rgba(0, 0, 0, 0.54);
+    font-size: 18px;
+    text-align:center;
+    margin-bottom: 10px;
+}
+
+.card-FR .card-separator {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+.card-FR .card-header .card-header-caption {
+-ms-flex-item-align: center;
+    align-self: center;
+display: -ms-flexbox;
+display: flex;
+-ms-flex: 1;
+    flex: 1;
+-ms-flex-direction: column;
+    flex-direction: column;
+overflow: hidden;
+padding: 0 0 0 12px;
+font-size: 25px;
+}
+
