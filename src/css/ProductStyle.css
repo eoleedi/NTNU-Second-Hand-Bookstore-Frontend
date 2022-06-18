@@ -1,31 +1,38 @@
 
 .MainContainer {
-    padding: 2% 5%;
-    margin-top: 100px;
+    /* padding: 2% 5%; */
+    margin-left: 100px;
+    
     /* box-sizing: border-box; */
     /* background-size: contain; */
     /* width: 100%; */
     display: flex;
-    vertical-align: middle;
-    justify-content: center;
+    
+    /* justify-content: center; */
+    /* align-items: center; */
     
   }
 
 .ProductPreview {
-    width: 20%;
-    padding: 2% ;
+    width: 14%;
+    padding: 10% 14% ;
+    margin-left: 100px;
     /* justify-content: right; */
     /* display: flex;
     justify-content: center; */
-    /* position:inherit; */
+    align-items: center; 
+    
     
 }
 
-
+.Word{
+    margin-top: 100px;
+}
 .ProductTitle {
+    margin-top: 100;
     margin-bottom: 10px;
     width: 100%;
-    padding: 5% 1% ;
+    /* padding: 5% 1% ; */
     font-size: 25px;
     font-weight: 600;
     font-family: 'Monospace',Monaco;
@@ -59,12 +66,36 @@
     cursor: pointer;
     box-sizing: content-box;
     font-weight: 600;
-    padding: 12px 24px;
+    padding: 12px 12px;
     
     
 }
 
-/* change like button color */
+.input-field input {
+	font-size: 16px;
+	display: block;
+	font-family: 'Rubik', sans-serif;
+	width: 100%;
+	padding: 10px 1px;
+	border: 0;
+	border-bottom: 1px solid #747474;
+	outline: none;
+	-webkit-transition: all .2s;
+	transition: all .2s;
+  }
+
+.CommentArea{
+    display: flex;
+    /* justify-content: center;
+    align-items: center;  */
+    width:"30%";
+    margin-left: 27%;
+}
+
+
+
+
+/* //change like button color
 .ChangeLike{
     min-width: 80px;
     background-color: rgb(236, 189, 189);
@@ -76,9 +107,9 @@
     cursor: pointer;
     box-sizing: content-box;
     font-weight: 600;
-    padding: 12px 24px;
+    padding: 12px 12px;
 }
-/* change button color */
+//change button color
 .ChangeBuy{
     min-width: 80px;
     background-color: rgb(176, 223, 239);
@@ -90,8 +121,8 @@
     cursor: pointer;
     box-sizing: content-box;
     font-weight: 600;
-    padding: 12px 24px;
-}
+    padding: 12px 12px;
+} */
 
 .LikesAndViews{
     /* display: inline-block; */
@@ -104,7 +135,6 @@
     justify-content: center;
     
 }
-/* .SelectedFeature{
-    color: white;
-    background-color: gray;
-} */
+
+
+

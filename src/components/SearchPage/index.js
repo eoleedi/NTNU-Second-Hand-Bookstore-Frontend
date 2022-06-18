@@ -7,17 +7,24 @@ const Page = ({Product, loading}) => {
   if (loading){
     return <h2>Loading...</h2>
   }
+  
   return (
     <ChakraProvider>
       <ImageList rowHeight={300} cols={4} style={{width:1000}}>
         { Product.map(products=> {
+          let Sold;
+          if(products.soldOut === "True")
+            Sold = "已售出"
+          else
+            Sold = "未售出"
+
           return(
             <Box  key={ products.productId } borderWidth='1px' overflow='hidden'>
-              <Image  ml='5' objectFit='contain' boxSize='200px' fallbackSrc='https://via.placeholder.com/150' src={products.images} alt="" />
+              <Image  ml='5' objectFit='contain' boxSize='200px' fallbackSrc='https://via.placeholder.com/150' src={products.images[0]} alt="" />
                 <Box  ml='5' p='6'>
                   <Box display='flex' alignItems='baseline'>
                     <Badge borderRadius='full' px='2' colorScheme='teal'>
-                      {products.condition}
+                      {Sold}
                     </Badge>
                     <Box className='Boxes'
                       color='gray.500'

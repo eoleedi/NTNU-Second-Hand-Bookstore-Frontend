@@ -6,12 +6,13 @@
     "@chakra-ui/core": "^0.8.0",
     "@chakra-ui/react": "^2.2.1",
     "@emotion/core": "^10.3.1",
-    "@emotion/react": "^11.9.0",
-    "@emotion/styled": "^11.8.1",
+    "@emotion/react": "^11.9.3",
+    "@emotion/styled": "^11.9.3",
     "@fortawesome/fontawesome-svg-core": "^6.1.1",
     "@fortawesome/free-solid-svg-icons": "^6.1.1",
     "@fortawesome/react-fontawesome": "^0.1.18",
     "@material-ui/core": "^4.12.4",
+    "@mui/material": "^5.8.4",
     "@syncfusion/ej2-layouts": "^20.1.58",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
@@ -38,8 +39,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "start-host": "HOST=192.168.50.53 PORT=3000 react-scripts start"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
