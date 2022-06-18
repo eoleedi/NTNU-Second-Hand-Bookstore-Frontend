@@ -89,26 +89,33 @@
   }
 
 .container-2 {
-    /* width: 30%; */
+    width: 30%;
     /* height: 50px; */
+    height: 100%;
     margin-left: 1rem;
     margin-right: 1.5rem;
     /* background: #65737e; */
     white-space: nowrap;
-    
+    display: flex;
+    align-items: center;
 }
 
-.container-2 span.title, span.title:hover, span.title:visited{
-    font-size: 2em;
-    text-decoration:none;
+.title {
+    font-size: 36px;
+    /* text-decoration: none; */
     color: #262626;
     text-align: center;
 }
 
+.container-2 > img {
+    max-height: 100%;
+    max-width: 100%;
+    display: block;
+}
 
 .container-2 button img.title_icon {
-    height:"100%";
-    width:"35px";
+    /* height: 100%; */
+    width: "35px";
     color: #262626;
     /* height: 5; */
 }

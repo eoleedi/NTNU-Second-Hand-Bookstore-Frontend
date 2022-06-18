@@ -26,7 +26,6 @@
 .carousel-content {
     display: flex;
     transition: all 250ms linear;
-    
 }
 
 /* hide scrollbar in webkit browser */
@@ -37,7 +36,8 @@
 .carousel-content > * {
     width: 100%;
     flex-shrink: 0;
-    flex-grow: 1;
+    flex-shrink: 1;
+    /* flex-grow: 1; */
 }
 
 .carousel-content.show-2 > * {

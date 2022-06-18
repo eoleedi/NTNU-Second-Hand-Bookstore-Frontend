@@ -28,9 +28,9 @@ import "../../css/topbar.css";
 
 function Topbar() {
 
-	// const [errorMsg, setErrorMsg] = useState('');
-	const [notificationsData, setNotification] = useState('');
-	const [searchText, setSearchText] = useState('');
+	// const [errorMsg, setErrorMsg] = useState("");
+	const [notificationsData, setNotification] = useState("");
+	const [searchText, setSearchText] = useState("");
 	const navigate = useNavigate();
 
 	async function fetchNotification() {
@@ -57,18 +57,18 @@ function Topbar() {
 	}
 
 	function ClickNotification() {
-		if (document.getElementById('notification').style.display == 'none') {
-			document.getElementById('notification').style.display = ''
+		if (document.getElementById("notification").style.display == "none") {
+			document.getElementById("notification").style.display = ''
 			
 		}
 		else {
-			document.getElementById('notification').style.display = 'none'
+			document.getElementById("notification").style.display = "none"
 		}
 	}
 	
 	function getNotification() {
 		fetchNotification()
-		var notification_div = <div class='notis'> </div>
+		var notification_div = <div class="notis"> </div>
 		var notis = []
 		console.log("noifications:" + notificationsData)
 		// if(notifications_data) {
@@ -89,8 +89,8 @@ function Topbar() {
 	return (
 		<div class="box">
 			<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"></link>
-			<div class="container-2" onClick={() => {navigate("/home")}}>
-				<span class="title"><img src="../../logo192.png" width="35px" color="#262626"></img>二手書交易平台</span>
+			<div class="container-2" onClick={() => {navigate("/")}}>
+				<img src="../../logo192.png" color="#262626"/><div class="title">二手書交易平台</div>
 			</div>
 			<div class="container-1" >
 				<input type="search" id="search" placeholder="Search..." value={searchText} onChange={(e) => setSearchText(e.target.value)}></input>
@@ -98,7 +98,7 @@ function Topbar() {
 			</div>
 			<button class="icon" onClick={ClickNotification}><IoIosNotifications /></button>
 			<button class="icon" onClick={() => {navigate("/user/profile")}}><IoMdPerson /></button>
-			{/* <div id='notification' class='notification'>
+			{/* <div id="notification" class="notification">
 				{getNotification()}
 			</div> */}
 		</div>

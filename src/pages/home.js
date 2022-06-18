@@ -1,75 +1,83 @@
-import React, {useEffect, useState} from 'react';
-import {Link} from 'react-router-dom';
+import React, {useEffect, useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import Announcement from "../components/Announcement"
 import Carousel from "../components/Carousel"
-import "../css/imagestyle.css"; //align picture
+import "../css/imagestyle.css";  //align picture
 
-// http://localhost:3000/productarray  //json : local data test slider
-// https://ntnu.site/api/product       //json.data.data.products
 
 const Home = () => {
   
-  const [ProductData, setProductData] = useState([]);
+    const imageHeight = 240;
+    const imageWidth  = imageHeight * 3 / 4;
+    const imageSpace  = 30;
+    const blockWidth  = imageWidth + imageSpace;
+    const show        = Math.floor((window.innerWidth*0.7+imageSpace)/blockWidth)
 
-  useEffect(() => {
-    const fetchData = async() =>{
-      try{
-          const response = await fetch(`http://localhost:3000/productarray`,{
-              method:'GET',
-              headers: {
-                  'Content-Type': 'application/json',
-              },
-              mode: "cors",
-              credentials:"include",
-          });
-          const json = await response.json();
-          // console.log(json);
-          setProductData((json));
-          
-      }catch(error){
-          console.log("error",error);
-      }
-  };
-  fetchData();
-  },[]) ;
-  // console.log(ProductData);
-  
-  return (
+    const [ProductData, setProductData] = useState([]);
+	const navigate = useNavigate();
 
-    <div>
-      
-      <Link to="/products/search">go to search result page</Link>
-      <br/>
-                 
-      <div style={{ marginTop: 60, marginLeft: 310, height: 50}}>
-          <h2>Top 10</h2>
-      </div>
-      <div style={{ align:"center", maxWidth: 600, marginLeft: 'auto', marginRight: 'auto', marginBottom: 40}}>
-        <Carousel show={4}>
-        
-          { ProductData.map(products=> {
-            return(
-              <div className="column" key={ products.productId } style={{width: 134}}>
-              <img src={ products.images[0]} alt="" style={{height:"80%",width:"95%"}}/>
-              <br />
-              <Link to={`/products/${products.productId}`}>{products.name}</Link> 
-              </div>
-            )})}
-              
-          
-        
-        </Carousel>
-      </div>
-      <div style={{ align:"center"}}>
-        <Announcement>
-        </Announcement>
-      </div>
-      
-    </div>
-  );
-};
+    useEffect(() => {
+        const fetchData = async() =>{
+            await fetch("https://ntnu.site/api/product/", {
+                method: "GET",
+                credentials:"include",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            })
+            .then((response) => response.json())
+            .then((response) => {
+                if (response.status != "ok") {
+                    alert(response.message);
+                }
+                else {
+                    setProductData(response.data.products);
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+        };
+
+        fetchData();
+    }, []);
+
+    return (
+        <div className="index-page">
+            {/* <Link to="/products/search">go to search result page</Link><br/> */}
+            <div id style={{ marginTop: 40, marginLeft: "auto", marginRight: "auto", width: "70%"}}>
+                <h2>Top 10</h2>
+            </div>
+            <div id="my-carousel-container" className="my-carousel-container">
+                <Carousel show={show} lastSpace={ProductData.length*blockWidth-imageSpace-window.innerWidth*0.7}>
+                    {
+                        ProductData.map((products, index) => {
+                            let padding = 0;
+                            if (index+1 == ProductData.length) { padding = 0; }
+                            else                               { padding = imageSpace; }
+                            return (
+                                <div className="column"
+                                     key={ products.productId }
+                                     style={{width: imageWidth, marginRight: padding}}
+                                     onClick={ () => navigate("../product/" + products.productId) }
+                                >
+                                    <div className="img-container" style={{height: imageHeight, width: imageWidth}}>
+                                        <img src={products.images[0]} alt='' style={{}}/>
+                                    </div>
+                                    <div className="product-name">{products.name}</div>
+                                </div>
+                            )
+                        })
+                    }
+                </Carousel>
+            </div>
+            <div style={{ align:"center"}}>
+                <Announcement>
+                </Announcement>
+            </div>
+        </div>
+    );
+}
 
 
-
-  
 export default Home;

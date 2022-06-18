@@ -1,7 +1,39 @@
+.index-page {
+    display: flex;
+    height: 90vh;
+    flex-direction: column;
+}
+
+.my-carousel-container {
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 70%;
+    height: 40%;
+    display: flex;
+}
+
 .column {
-    /* float: left; */
-    width: 30%;
-    padding: 8px;
-    
-  }
-  
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.img-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid rgb(255, 225, 193);
+    border-radius: 5%;
+}
+
+img {
+    max-height: 100%;
+    max-width: 100%;
+    display: block;
+}
+
+.product-name {
+    line-height: 2em;
+}
