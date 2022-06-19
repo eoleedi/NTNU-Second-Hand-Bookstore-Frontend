@@ -11,9 +11,9 @@ import "../../css/imagestyle.css";  //align picture
 
 const test = () => {
 
-	// const [ cookies ] = useCookies();
+	const [ cookies ] = useCookies();
     const navigate = useNavigate();
-	// if (!cookies.jwt) navigate("../../login");
+	if (!cookies.jwt) navigate("../../login");
 
     const { productId } = useParams();
 	const [ ISBN            , setISBN             ] = useState('');

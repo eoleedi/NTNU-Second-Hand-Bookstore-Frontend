@@ -90,7 +90,7 @@ function Topbar() {
 	}, [])
 	
 	async function handleLogout() {
-		return fetch("https://ntnu.site/api/auth/session", {
+		await fetch("https://ntnu.site/api/auth/session", {
 			method: "GET",
 			credentials: "include",
 			headers: {
@@ -101,7 +101,8 @@ function Topbar() {
 			.then((response) => {
 				alert(response.message);
 				if (response.status === "ok") {
-					setIsLogin(false)
+					setIsLogin(!!cookies.jwt)
+					navigate("../../login")
 				}
 			})
 			.catch((error) => {
@@ -121,8 +122,8 @@ function Topbar() {
 					<input type="search" id="search" placeholder="Search..." value={searchText} onChange={(e) => setSearchText(e.target.value)}></input>
 					<button class="icon" onClick={() => { navigate(`/products/search/${searchText}`) }}><i class="fa fa-search"></i></button>
 				</div>
-				{(<div onClick={handleLogout}>Logout</div>)}
-				{(<div onClick={()=>navigate("../../login")}>Login</div>)}
+				{!isLogin&&(<div onClick={handleLogout}>Logout</div>)}
+				{isLogin&&(<div onClick={()=>navigate("../../login")}>Login</div>)}
 				<button class="icon" onClick={ClickNotificationIcon}><IoIosNotifications/></button>
 				<button class="icon" onClick={() => {navigate("/user/profile")}}><IoMdPerson/></button>
 				<div style={{width: 20}}></div>
