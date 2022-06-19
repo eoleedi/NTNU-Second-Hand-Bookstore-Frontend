@@ -2,9 +2,10 @@ import { IoMdPerson } from "react-icons/io";
 import { NavLink as Link } from "react-router-dom";
 import styled from "styled-components";
 
+
 export const Nav = styled.nav`
 	background: #d9d9d9;
-	height: 44rem;
+	height: calc(90vh - 40px);
 	width: 25rem;
 	z-index: 1; /* Stay on top */
 	top: 0; /* Stay at the top */

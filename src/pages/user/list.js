@@ -7,6 +7,7 @@ import UserSidebar from "../../components/UserSidebar";
 import "../../css/user.css";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+
 function List() {
 
 	const imageHeight = 100;
@@ -16,6 +17,7 @@ function List() {
 	const [collection, setCollection] = useState([]);
 	const [history, setHistory] = useState([]);
 	const navigate = useNavigate();
+
 
 	useEffect(() => {
 		const fetchlist = async () => {
@@ -43,24 +45,16 @@ function List() {
 		fetchlist();
 	}, []);
 
+
 	return (
 		<div className="member-page">
 			<UserSidebar />
 			<div className="body-text">
 				<div>收藏</div>
 				<Table striped bordered hover size="sm">
-					{/* <thead style={{display: "block", width: "100%"}}>
-						<tr style={{display: "block"}}>
-							<Row style={{marginLeft: 0, marginRight: 17}}>
-								<Col sm="auto"><th style={{width: imageWidth}}>商品圖片</th></Col>
-								<Col><th>商品名稱</th></Col>
-								<Col sm="auto"><th style={{width: priceWidth}}>商品價格</th></Col>
-							</Row>
-						</tr>
-					</thead> */}
 					<tbody style={{overflowY: "scroll", height: tableHeight, display: "block"}}>
 						{collection.length > 0 ?
-							collection.map((item) => 
+							collection.map((item) =>
 								<tr style={{display: "block"}}>
 									<Row style={{marginLeft: 0, marginRight: 0}} onClick={() => navigate("../../products/" + item.productId)}>
 										<Col sm="auto"><td className="img-container" style={{height: imageHeight, width: imageWidth}}>
@@ -93,15 +87,6 @@ function List() {
 
 				<div>歷史紀錄</div>
 				<Table striped bordered hover size="sm">
-					{/* <thead style={{display: "block", width: "100%"}}>
-						<tr style={{display: "block"}}>
-							<Row style={{marginLeft: 0, marginRight: 17}}>
-								<Col sm="auto"><th style={{width: imageWidth}}>商品圖片</th></Col>
-								<Col><th>商品名稱</th></Col>
-								<Col sm="auto"><th style={{width: priceWidth}}>商品價格</th></Col>
-							</Row>
-						</tr>
-					</thead> */}
 					<tbody style={{overflowY: "scroll", height: tableHeight, display: "block"}}>
 						{history.length > 0 ?
 							history.map((item) => 

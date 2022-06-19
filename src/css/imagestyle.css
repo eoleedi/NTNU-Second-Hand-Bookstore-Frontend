@@ -1,7 +1,11 @@
 .index-page {
     display: flex;
-    height: 90vh;
+    height: calc(90vh - 60px);
     flex-direction: column;
+}
+
+.my-nav {
+    margin-top: 0;
 }
 
 .my-carousel-container {

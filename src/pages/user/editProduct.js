@@ -162,7 +162,7 @@ const test = () => {
 
 
 	return (
-		<div className="App">
+		<div className="index-page">
 			<div
 				className={[
 					styles.container,

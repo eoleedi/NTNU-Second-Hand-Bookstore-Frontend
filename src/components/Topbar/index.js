@@ -1,6 +1,8 @@
 import React, { useState,useEffect } from "react";
 import { IoIosNotifications, IoMdPerson } from "react-icons/io"
 import { useNavigate } from "react-router-dom";
+import { Table } from 'react-bootstrap';
+import { handleLogout } from "../../pages/user/profile"
 import { useCookies } from 'react-cookie';
 // import { Nav, NavLink, NavMenu, PersonIcon } from "./TopBarElements";
 import "../../css/topbar.css";
@@ -30,16 +32,21 @@ import "../../css/topbar.css";
 
 function Topbar() {
 
-	// const [errorMsg, setErrorMsg] = useState("");
-	const [notificationsData, setNotification] = useState("");
-	const [searchText, setSearchText] = useState("");
-	const navigate = useNavigate();
-	const [ isLogin, setIsLogin ] = useState(true);
+	const [ notifications     , setNotifications     ] = useState([]);
+	const [ lastTimestamp     , setLastTimestamp     ] = useState("");
+	const [ searchText        , setSearchText        ] = useState("");
+	const [ isLogin           , setIsLogin           ] = useState(false);
 	const [ cookies ] = useCookies();
-	// if (!cookies.jwt) navigate("../../login");
+	const navigate = useNavigate();
 
-	async function fetchNotification() {
-		return fetch("https://ntnu.site/api/member/notifications", {
+
+	async function fetchNotification(read) {
+
+		let url = "https://ntnu.site/api/member/notifications";
+		url += "?read=" + read
+		if (!!lastTimestamp) url += "&timestamp=" + lastTimestamp;
+
+		return fetch(url, {
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json",
@@ -52,72 +59,57 @@ function Topbar() {
 					alert(response.message)
 				}
 				else {
-					setNotification(response.data.notifications)
+					setNotifications([...notifications, ...response.data.notifications])
+					setLastTimestamp(response.data.timestamp)
 				}
 			})
 			.catch((error) => {
 				console.log(error);
-				// alert(errorMsg);
 			});
 	}
 
-	function ClickNotification() {
+	function ClickNotificationIcon() {
 		if (document.getElementById("notification").style.display === "none") {
+			fetchNotification(true)
 			document.getElementById("notification").style.display = ''
-			
 		}
 		else {
+			// for (let notification in notifications) {
+			// 	notification.read = true
+			// }
+			notifications.forEach((notification) => {
+				notification.read = true
+			})
 			document.getElementById("notification").style.display = "none"
 		}
 	}
-	
-	function getNotification() {
-		fetchNotification()
-		var notification_div = <div class="notis"> </div>
-		var notis = []
-		console.log("noifications:" + notificationsData)
-		// if(notifications_data) {
-			// notifications_data.array.forEach(element => {
-			// 	notis.push(notification_div)
-			// });
-		// }
-		for (var i = 0; i < notificationsData.length; i++) {
-			// if(notis == null)
-			// 	notis = notification_div
-			// else
-			// 	notis += notification_div
-			notis.push(notification_div)
-		}
-		return (<> {notis} </>)
-	}
+
+	useEffect(() => {
+		setIsLogin(!!cookies.jwt);
+		if (!!cookies.jwt) fetchNotification(false);
+	}, [])
 	
 	async function handleLogout() {
-		return fetch(`https://ntnu.site/api/auth/session`, {
+		await fetch("https://ntnu.site/api/auth/session", {
 			method: "GET",
+			credentials: "include",
 			headers: {
 				"Content-Type": "application/json",
 			},
-			mode: "cors",
-			credentials:"include",
 		})
 			.then((response) => response.json())
 			.then((response) => {
 				alert(response.message);
 				if (response.status === "ok") {
-					
 					setIsLogin(!!cookies.jwt)
 					navigate("../../login")
-					
 				}
-				
 			})
 			.catch((error) => {
 				console.log(error);
 			});
-    
     }
 
-	
 
 	return (
 		<div class="box">
@@ -132,11 +124,33 @@ function Topbar() {
 				</div>
 				{!isLogin&&(<div onClick={handleLogout}>Logout</div>)}
 				{isLogin&&(<div onClick={()=>navigate("../../login")}>Login</div>)}
-				<button class="icon" onClick={ClickNotification}><IoIosNotifications /></button>
-				<button class="icon" onClick={() => {navigate("/user/profile")}}><IoMdPerson /></button>
-				{/* <div id='notification' class='notification'>
-					{getNotification()}
-				</div> */}
+				<button class="icon" onClick={ClickNotificationIcon}><IoIosNotifications/></button>
+				<button class="icon" onClick={() => {navigate("/user/profile")}}><IoMdPerson/></button>
+				<div style={{width: 20}}></div>
+				<div style={{width: 0}}>
+					<div id="notification" class="notification">
+						<Table striped bordered hover size="sm" style={{marginBottom: 0}}>
+							{
+								notifications.length > 0 ?
+									notifications.map((notification) => 
+										notification.read ? (
+											<div>
+												<div className="notification-time">時間：{notification.createTime}</div>
+												<div className="notification-content">內容：{notification.content}</div>
+											</div>
+										) : (
+											<div className="notification-new">
+												<div className="notification-time">時間：{notification.createTime}</div>
+												<div className="notification-content">內容：{notification.content}</div>
+											</div>
+										)
+									) : (
+										<div>暫無通知</div>	
+									)
+							}
+						</Table>
+					</div>
+				</div>
 			</div>
 		</div>
 	);
