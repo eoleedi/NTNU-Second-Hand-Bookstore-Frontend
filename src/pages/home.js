@@ -63,7 +63,13 @@ const Home = () => {
                                      onClick={ () => navigate("../products/" + products.productId) }
                                 >
                                     <div className="img-container" style={{height: imageHeight, width: imageWidth}}>
-                                        <img src={products.images[0]} alt=''/>
+                                        {
+                                            products.images.length > 0 ? (
+                                                <img src={products.images[0]} alt=''/>
+                                            ) : (
+                                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXd5451e837N2pG4biVWIzg3IV-DeCTG4STHw3BwpBhQI2CyyZRKiTyc3MRaZRGohKcLE&usqp=CAU" alt=''/>
+                                            )
+                                        }
                                     </div>
                                     <div className="product-name">{products.name}</div>
                                 </div>

@@ -1,17 +1,20 @@
 
 .MainContainer {
-    /* padding: 2% 5%; */
-    margin-left: 100px;
-    
-    /* box-sizing: border-box; */
-    /* background-size: contain; */
-    /* width: 100%; */
+    padding-top: 5vh;
+    padding-bottom: 5vh;
+    padding-right: 10vh;
+    padding-left: 10vh;
     display: flex;
-    
-    /* justify-content: center; */
-    /* align-items: center; */
-    
-  }
+    flex-direction: column;
+    max-height: 90vh;
+}
+
+.SubContainer {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
 
 .ProductPreview {
     width: 14%;
@@ -21,13 +24,11 @@
     /* display: flex;
     justify-content: center; */
     align-items: center; 
-    
-    
 }
 
-.Word{
+/* .Word{
     margin-top: 100px;
-}
+} */
 .ProductTitle {
     margin-top: 100;
     margin-bottom: 10px;
@@ -84,14 +85,14 @@
 	transition: all .2s;
   }
 
-.CommentArea{
+/* .CommentArea {
     display: flex;
-    /* justify-content: center;
-    align-items: center;  */
-    width:"30%";
-    margin-left: 27%;
+    justify-content: center;
+    align-items: center; 
+    width: 100%;
+    margin-left: 20%;
     margin-top: 4%;
-}
+} */
 
 
 
@@ -133,8 +134,4 @@
 .Button{
     display: flex;
     justify-content: center;
-    
 }
-
-
-
