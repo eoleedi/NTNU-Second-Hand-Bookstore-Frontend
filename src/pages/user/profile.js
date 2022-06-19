@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { useCookies } from 'react-cookie';
 import UserSidebar from "../../components/UserSidebar";
 import "../../css/user.css";
 
@@ -9,7 +9,9 @@ function Profile() {
 	
 	const [profile, setProfile] = useState(null);
 	
-	const navigate = useNavigate();
+	const [ cookies ] = useCookies();
+    const navigate = useNavigate();
+	// if (!cookies.jwt) navigate("../../login");
 
 	useEffect(() => {
 		const fetchInfo = async () => {
@@ -32,13 +34,6 @@ function Profile() {
 		};
 		fetchInfo();
 	}, []);
-
-	//save data to localstorage
-    useEffect(()=>{
-        window.localStorage.setItem('USER_DATA',JSON.stringify(profile))
-    },[profile])
-
-	
 
 	
 

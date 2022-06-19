@@ -26,9 +26,9 @@
     align-items: center; 
 }
 
-/* .Word{
-    margin-top: 100px;
-} */
+.Word{
+    /* margin-top: 100px; */
+}
 .ProductTitle {
     margin-top: 100;
     margin-bottom: 10px;
@@ -47,7 +47,7 @@
     font-family: 'Monospace',Monaco;
     display: flex;
     justify-content: left;
-    max-width: 40%;
+    max-width: 70%;
 }
 .LikeAndViewDescription{
     margin-top: 2px;
