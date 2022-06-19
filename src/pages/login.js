@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/login.css";
 
@@ -23,7 +23,6 @@ function page() {
 			headers: {
 				"Content-Type": "application/json",
 			},
-            // mode: "cors",
 			credentials: "include",
 			body: JSON.stringify({
 				username: username.trim(),

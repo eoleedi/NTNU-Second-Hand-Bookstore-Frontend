@@ -1,6 +1,6 @@
 .member-page {
     display: flex;
-    height: 90vh;
+    height: calc(90vh - 60px);
     justify-content: center;
 }
 .member-page > div{

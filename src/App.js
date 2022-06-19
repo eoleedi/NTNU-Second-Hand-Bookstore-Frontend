@@ -59,7 +59,7 @@ function App() {
 
 					<Route path="test" element={<ImageUploader />} />
 				</Routes>
-        		{/* <Navbar /> */}
+        		<Navbar/>
 			</Router>
 		</div>
 	);

@@ -1,12 +1,11 @@
 import React from 'react';
-import Topbar from "../components/Topbar";
 import "../css/card.css"
+import "../css/imagestyle.css";  //align picture
 
 
 const FAQ = () => {
   return (
-    <div>
-    <Topbar />
+    <div className="index-page">
       <div align="center" style={{marginTop:"4%",marginBottom:"4%"}}>
         <div className="card-FR" id="basic" style={{ width: `900px`,height: `500px`} }>
           <div className="card-header" align="center" style={{background: '#CEBDBD'} } >

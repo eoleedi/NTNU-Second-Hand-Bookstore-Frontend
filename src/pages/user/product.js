@@ -10,11 +10,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Product() {
 
-	const imageHeight       = 80;
-	const imageWidth        = imageHeight * 3 / 4;
-	// const priceWidth        = 100;
-	// const actionButtonWidth = 120;
-	const tableHeight       = 250;
+	const imageHeight = 80;
+	const imageWidth  = imageHeight * 3 / 4;
+	const tableHeight = 240;
 
 	const [forSaleProducts, setForSaleProducts] = useState([]);
 	const [editingProducts, setEditingProducts] = useState([]);
@@ -164,7 +162,7 @@ function Product() {
 							) : (
 								<tr style={{display: "block"}}>
 									<Row style={{marginLeft: 0, marginRight: 0}}>
-										<Col><td>暫無商品，請新增商品!</td></Col>
+										<Col><td>暫無商品，請新增商品！</td></Col>
 									</Row>
 								</tr>
 							)

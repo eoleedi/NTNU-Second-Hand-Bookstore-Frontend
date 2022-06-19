@@ -45,7 +45,7 @@ const ProductDetail = () => {
     const imageHeight = 300;
 	const imageWidth  = imageHeight * 3 / 4;
     
-
+    
     async function updateLike() {
         await fetch(`https://ntnu.site/api/product/view?productId=${productId}`,{
             method: "GET",
@@ -251,7 +251,7 @@ const ProductDetail = () => {
         <div className="MainContainer">
             <div className="SubContainer">
                 <div id="carousel-container" className="carousel-container"
-                        style={{height: imageHeight, width: imageWidth+40, marginRight: 80}}>
+                        style={{height: imageHeight, width: imageWidth+40, marginLeft: 40, marginRight: 80}}>
                     <Carousel show={1} imageWidth={imageWidth}>
                         {
                             images.length > 0 ? (
