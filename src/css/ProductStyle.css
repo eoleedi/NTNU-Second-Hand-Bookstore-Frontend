@@ -46,6 +46,7 @@
     font-family: 'Monospace',Monaco;
     display: flex;
     justify-content: left;
+    max-width: 40%;
 }
 .LikeAndViewDescription{
     margin-top: 2px;

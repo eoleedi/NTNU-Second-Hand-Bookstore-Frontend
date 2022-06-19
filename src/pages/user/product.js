@@ -12,8 +12,8 @@ function Product() {
 
 	const imageHeight       = 80;
 	const imageWidth        = imageHeight * 3 / 4;
-	const priceWidth        = 100;
-	const actionButtonWidth = 120;
+	// const priceWidth        = 100;
+	// const actionButtonWidth = 120;
 	const tableHeight       = 250;
 
 	const [forSaleProducts, setForSaleProducts] = useState([]);
@@ -138,7 +138,7 @@ function Product() {
 									<Row style={{marginLeft: 0, marginRight: 0}}>
 										<Col sm="auto" onClick={() => navigate("../../products/" + item.productId)}>
 											<div className="img-container" style={{height: imageHeight, width: imageWidth}}>
-												<img src={item.images[0]}/></div>
+												<img src={item.images[0]} alt=""/></div>
 										</Col>
 										<Col sm={3} className="border-column" onClick={() => navigate("../../products/" + item.productId)}>
 											商品名稱：<br/>{item.name}<br/>
@@ -174,7 +174,7 @@ function Product() {
 									<Row style={{marginLeft: 0, marginRight: 0}}>
 										<Col sm="auto" onClick={() => navigate("../../products/" + item.productId)}>
 											<div className="img-container" style={{height: imageHeight, width: imageWidth}}>
-												<img src={item.images[0]}/></div>
+												<img src={item.images[0]} alt=""/></div>
 										</Col>
 										<Col sm={3} className="border-column" onClick={() => navigate("../../products/" + item.productId)}>
 											商品名稱：<br/>{item.name}<br/>
@@ -210,7 +210,7 @@ function Product() {
 									<Row style={{marginLeft: 0, marginRight: 0}}>
 										<Col sm="auto" onClick={() => navigate("../../products/" + item.productId)}>
 											<div className="img-container" style={{height: imageHeight, width: imageWidth}}>
-												<img src={item.images[0]}/></div>
+												<img src={item.images[0]} alt=""/></div>
 										</Col>
 										<Col sm={3} className="border-column" onClick={() => navigate("../../products/" + item.productId)}>
 											商品名稱：<br/>{item.name}<br/>
