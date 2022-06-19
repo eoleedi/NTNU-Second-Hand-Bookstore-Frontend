@@ -12,8 +12,8 @@ function Product() {
 
 	const imageHeight       = 80;
 	const imageWidth        = imageHeight * 3 / 4;
-	const priceWidth        = 100;
-	const actionButtonWidth = 120;
+	// const priceWidth        = 100;
+	// const actionButtonWidth = 120;
 	const tableHeight       = 250;
 
 	const [forSaleProducts, setForSaleProducts] = useState([]);
