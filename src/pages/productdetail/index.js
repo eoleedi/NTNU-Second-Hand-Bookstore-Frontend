@@ -8,7 +8,6 @@ import { faEye, faBagShopping,faThumbsDown, faThumbsUp } from '@fortawesome/free
 import Comment from '../../components/Comments';
 
 
-
 const ProductDetail = () => {
 
     const { productId } = useParams();
@@ -31,7 +30,7 @@ const ProductDetail = () => {
     // const [buy,setBuy] = useState(false);
     // const [addcom, setAddcom] = useState(false);
 
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
     
     async function updateLike() {
         await fetch(`https://ntnu.site/api/product/view?productId=${productId}`,{
@@ -160,88 +159,87 @@ const ProductDetail = () => {
     if (noted) notedString = "有"
     else       notedString = "無"
 
-    // async function handleLike() {
-    //     return fetch("https://ntnu.site/api/product/like", {
-    //         method: "POST",
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //         },
-    //         mode: "cors",
-    //         credentials:"include",
-    //         body: JSON.stringify({
-    //             productId: Number(productId),
-    //         }),
-    //     })
-    //         .then((response) => response.json())
-    //         .then((response) => {
-    //             if (response.status !== "ok") {
-    //                 alert(response.message);
-    //             }
-    //             else{
-    //                 setLike(preState => !preState);
-    //                 alert("收藏商品成功!");
-    //             }
-    //             if(response.message === "Not logged in.")
-    //                 navigate("../login");
-    //         })
-    //         .catch((error) => {
-    //             console.log(error);
-    //         });
-    // }
+    async function handleLike() {
+        return fetch("https://ntnu.site/api/product/like", {
+            method: "POST",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                productId: Number(productId),
+            }),
+        })
+            .then((response) => response.json())
+            .then((response) => {
+                if (response.status !== "ok") {
+                    if (response.message === "Not logged in.") navigate("../login");
+                    else alert(response.message);
+                }
+                else{
+                    setLiked(preState => !preState);
+                    updateLike();
+                    alert("收藏商品成功！");
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
 
-    // async function handleUnlike() {
-    //     return fetch("https://ntnu.site/api/product/like", {
-    //         method: "DELETE",
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //         },
-    //         credentials:"include",
-    //         body: JSON.stringify({
-    //             productId: Number(productId),
-    //         }),
-    //     })
-    //         .then((response) => response.json())
-    //         .then((response) => {
-    //             if (response.status !== "ok") {
-    //                 alert(response.message);
-    //             }
-    //             else {
-    //                 setLike(preState => !preState);
-    //                 alert("刪除收藏商品成功!");
-    //             }
-    //             if (response.message === "Not logged in.") navigate("../login");
-    //         })
-    //         .catch((error) => {
-    //             console.log(error);
-    //         });
-    // }
+    async function handleUnlike() {
+        return fetch("https://ntnu.site/api/product/like", {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            credentials: "include",
+            body: JSON.stringify({
+                productId: Number(productId),
+            }),
+        })
+            .then((response) => response.json())
+            .then((response) => {
+                if (response.status !== "ok") {
+                    if (response.message === "Not logged in.") navigate("../login");
+                    else alert(response.message);
+                }
+                else {
+                    setLiked(preState => !preState);
+                    updateLike();
+                    alert("刪除收藏商品成功！");
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
 
-    // async function handleBuy() {
-    //     return fetch("https://ntnu.site/api/product/order", {
-    //         method: "POST",
-    //         headers: {
-    //             "Content-Type": "application/json",
-    //         },
-    //         credentials:"include",
-    //         body: JSON.stringify({
-    //             productId: Number(productId),
-    //         }),
-    //     })
-    //         .then((response) => response.json())
-    //         .then((response) => {
-    //             if (response.status !== "ok") {
-    //                 // setBuy(true)
-    //                 alert(response.message);
-    //             }
-    //             else{
-    //                 // setBuy(true)
-    //                 alert("購買(預訂)成功，請確認通知!");
-    //             }
-    //         })
-    //         .catch((error) => {
-    //             console.log(error);
-    //         });
-    // }
+    async function handleBuy() {
+        return fetch("https://ntnu.site/api/product/order", {
+            method: "POST",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                productId: Number(productId),
+            }),
+        })
+            .then((response) => response.json())
+            .then((response) => {
+                if (response.status !== "ok") {
+                    if (response.message === "Not logged in.") navigate("../login");
+                    else alert(response.message);
+                }
+                else{
+                    alert("購買（預訂）成功，請確認通知！");
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    }
     
     return (
         <div>
@@ -278,7 +276,7 @@ const ProductDetail = () => {
                         {/* 賣家姓名：{NewData.sellerDisplayName}<br/> */}
                     </p>
                     
-                    {/* <div className="Button">
+                    <div className="Button">
                         <button onClick={handleLike} className="Feature">
                             <FontAwesomeIcon icon={faThumbsUp} />&nbsp;Like
                         </button>
@@ -288,7 +286,7 @@ const ProductDetail = () => {
                         <button onClick={handleBuy} className="Feature">
                             <FontAwesomeIcon icon={faBagShopping} />&nbsp;Buy
                         </button>
-                    </div> */}
+                    </div>
                 </div>
                 
             </div>
