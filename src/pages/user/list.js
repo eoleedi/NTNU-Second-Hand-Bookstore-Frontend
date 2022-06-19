@@ -9,9 +9,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function List() {
 
-	const imageWidth  = 100;
-	const priceWidth  = 100;
-	const tableHeight = 370;
+	const imageHeight = 100;
+	const imageWidth  = imageHeight * 3 / 4;
+	const tableHeight = 400;
 
 	const [collection, setCollection] = useState([]);
 	const [history, setHistory] = useState([]);
@@ -28,7 +28,7 @@ function List() {
 			})
 				.then((response) => response.json())
 				.then((response) => {
-					if (response.status != "ok") {
+					if (response.status !== "ok") {
 						alert(response.message);
 					}
 					else {
@@ -49,7 +49,7 @@ function List() {
 			<div className="body-text">
 				<div>收藏</div>
 				<Table striped bordered hover size="sm">
-					<thead style={{display: "block", width: "100%"}}>
+					{/* <thead style={{display: "block", width: "100%"}}>
 						<tr style={{display: "block"}}>
 							<Row style={{marginLeft: 0, marginRight: 17}}>
 								<Col sm="auto"><th style={{width: imageWidth}}>商品圖片</th></Col>
@@ -57,20 +57,28 @@ function List() {
 								<Col sm="auto"><th style={{width: priceWidth}}>商品價格</th></Col>
 							</Row>
 						</tr>
-					</thead>
+					</thead> */}
 					<tbody style={{overflowY: "scroll", height: tableHeight, display: "block"}}>
 						{collection.length > 0 ?
 							collection.map((item) => 
 								<tr style={{display: "block"}}>
-									<Row style={{marginLeft: 0, marginRight: 0}} onClick={() => navigate("../../product")}>
-										<Col sm="auto"><td><img style={{width: imageWidth}} src={item.images[0]}/></td></Col>
-										<Col><td>{item.name}</td></Col>
-										<Col sm="auto"><td style={{width: priceWidth}}>{item.price}</td></Col>
+									<Row style={{marginLeft: 0, marginRight: 0}} onClick={() => navigate("../../products/" + item.productId)}>
+										<Col sm="auto"><td className="img-container" style={{height: imageHeight, width: imageWidth}}>
+											<img src={item.images[0]}/>
+										</td></Col>
+										<Col sm={3} className="border-column">
+											<Row><td>商品名稱：<br/>{item.name}</td></Row>
+											<Row><td>商品價格：${item.price}</td></Row>
+										</Col>
+										<Col><td>商品描述：<br/>{
+											item.extraDescription.length > 70 ?
+												item.extraDescription.substring(0, 70) + "..." : item.extraDescription
+										}</td></Col>
 									</Row>
 								</tr>
 							) : (
 								<tr>
-									<td colSpan={4}>暫無商品</td>	
+									<td colSpan={4}>暫無商品</td>
 								</tr>
 							)
 						}
@@ -79,7 +87,7 @@ function List() {
 
 				<div>歷史紀錄</div>
 				<Table striped bordered hover size="sm">
-					<thead style={{display: "block", width: "100%"}}>
+					{/* <thead style={{display: "block", width: "100%"}}>
 						<tr style={{display: "block"}}>
 							<Row style={{marginLeft: 0, marginRight: 17}}>
 								<Col sm="auto"><th style={{width: imageWidth}}>商品圖片</th></Col>
@@ -87,15 +95,23 @@ function List() {
 								<Col sm="auto"><th style={{width: priceWidth}}>商品價格</th></Col>
 							</Row>
 						</tr>
-					</thead>
+					</thead> */}
 					<tbody style={{overflowY: "scroll", height: tableHeight, display: "block"}}>
 						{history.length > 0 ?
 							history.map((item) => 
 								<tr style={{display: "block"}}>
-									<Row style={{marginLeft: 0, marginRight: 0}} onClick={() => navigate("../../product")}>
-										<Col sm="auto"><td><img style={{width: imageWidth}} src={item.images[0]}/></td></Col>
-										<Col><td>{item.name}</td></Col>
-										<Col sm="auto"><td style={{width: priceWidth}}>{item.price}</td></Col>
+									<Row style={{marginLeft: 0, marginRight: 0}} onClick={() => navigate("../../products/" + item.productId)}>
+										<Col sm="auto"><td className="img-container" style={{height: imageHeight, width: imageWidth}}>
+											<img src={item.images[0]}/>
+										</td></Col>
+										<Col sm={3} className="border-column">
+											<Row><td>商品名稱：<br/>{item.name}</td></Row>
+											<Row><td>商品價格：${item.price}</td></Row>
+										</Col>
+										<Col><td>商品描述：<br/>{
+											item.extraDescription.length > 70 ?
+												item.extraDescription.substring(0, 70) + "..." : item.extraDescription
+										}</td></Col>
 									</Row>
 								</tr>
 							) : (

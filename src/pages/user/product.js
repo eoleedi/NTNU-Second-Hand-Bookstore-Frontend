@@ -10,10 +10,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Product() {
 
-	const imageWidth        = 80;
+	const imageHeight       = 80;
+	const imageWidth        = imageHeight * 3 / 4;
 	const priceWidth        = 100;
 	const actionButtonWidth = 120;
-	const tableHeight       = 210;
+	const tableHeight       = 250;
 
 	const [forSaleProducts, setForSaleProducts] = useState([]);
 	const [editingProducts, setEditingProducts] = useState([]);
@@ -30,7 +31,7 @@ function Product() {
 		})
 			.then((response) => response.json())
 			.then((response) => {
-				if (response.status != "ok") {
+				if (response.status !== "ok") {
 					alert(response.message);
 				}
 				else {
@@ -57,7 +58,7 @@ function Product() {
 		})
 			.then((response) => response.json())
 			.then((response) => {
-				if (response.status != "ok") {
+				if (response.status !== "ok") {
 					alert(response.message);
 				}
 				else {
@@ -83,7 +84,7 @@ function Product() {
 		})
 			.then((response) => response.json())
 			.then((response) => {
-				if (response.status != "ok") {
+				if (response.status !== "ok") {
 					alert(response.message);
 				}
 				else {
@@ -109,7 +110,7 @@ function Product() {
 		})
 			.then((response) => response.json())
 			.then((response) => {
-				if (response.status != "ok") {
+				if (response.status !== "ok") {
 					alert(response.message);
 				}
 				else {
@@ -130,28 +131,27 @@ function Product() {
 			<div className="body-text">
 				<div>已上架</div>
 				<Table striped bordered hover size="sm">
-					<thead style={{display: "block", width: "100%"}}>
-						<tr style={{display: "block"}}>
-							<Row style={{marginLeft: 0, marginRight: 17}}>
-								<Col sm="auto"><th style={{width: imageWidth}}>商品圖片</th></Col>
-								<Col><th>商品名稱</th></Col>
-								<Col sm="auto"><th style={{width: priceWidth}}>商品價格</th></Col>
-								<Col sm="auto"><th style={{width: actionButtonWidth}}>行動</th></Col>
-							</Row>
-						</tr>
-					</thead>
 					<tbody style={{overflowY: "scroll", height: tableHeight, display: "block"}}>
 						{forSaleProducts.length > 0 ?
 							forSaleProducts.map((item) => 
 								<tr style={{display: "block"}}>
 									<Row style={{marginLeft: 0, marginRight: 0}}>
-										<Col sm="auto" onClick={() => navigate("../../product")}><td><img style={{width: imageWidth}} src={item.images[0]}/></td></Col>
-										<Col onClick={() => navigate("../../product")}><td>{item.name}</td></Col>
-										<Col sm="auto" onClick={() => navigate("../../product")}><td style={{width: priceWidth}}>{item.price}</td></Col>
-										<Col sm="auto"><td style={{width: actionButtonWidth}}>
-											<button onClick={() => discontinueProduct(item.productId, item.name)}>下架</button><br/>
+										<Col sm="auto" onClick={() => navigate("../../products/" + item.productId)}>
+											<div className="img-container" style={{height: imageHeight, width: imageWidth}}>
+												<img src={item.images[0]}/></div>
+										</Col>
+										<Col sm={3} className="border-column" onClick={() => navigate("../../products/" + item.productId)}>
+											商品名稱：<br/>{item.name}<br/>
+											商品價格：${item.price}
+										</Col>
+										<Col className="border-column" onClick={() => navigate("../../products/" + item.productId)}>
+											商品描述：<br/>{ item.extraDescription.length > 60 ?
+												item.extraDescription.substring(0, 60) + "..." : item.extraDescription }
+										</Col>
+										<Col sm="auto" className="button-column">
+											<button onClick={() => discontinueProduct(item.productId, item.name)}>下架</button>
 											<button onClick={() => outOfStockProduct(item.productId, item.name)}>標示為售出</button>
-										</td></Col>
+										</Col>
 									</Row>
 								</tr>
 							) : (
@@ -167,28 +167,27 @@ function Product() {
 
 				<div>未上架</div>
 				<Table striped bordered hover size="sm">
-					<thead style={{display: "block", width: "100%"}}>
-						<tr style={{display: "block"}}>
-							<Row style={{marginLeft: 0, marginRight: 17}}>
-								<Col sm="auto"><th style={{width: imageWidth}}>商品圖片</th></Col>
-								<Col><th>商品名稱</th></Col>
-								<Col sm="auto"><th style={{width: priceWidth}}>商品價格</th></Col>
-								<Col sm="auto"><th style={{width: actionButtonWidth}}>行動</th></Col>
-							</Row>
-						</tr>
-					</thead>
 					<tbody style={{overflowY: "scroll", height: tableHeight, display: "block"}}>
 						{editingProducts.length > 0 ?
 							editingProducts.map((item) => 
 								<tr style={{display: "block"}}>
 									<Row style={{marginLeft: 0, marginRight: 0}}>
-										<Col sm="auto" onClick={() => navigate("../../product")}><td><img style={{width: imageWidth}} src={item.images[0]}/></td></Col>
-										<Col onClick={() => navigate("../../product")}><td>{item.name}</td></Col>
-										<Col sm="auto" onClick={() => navigate("../../product")}><td style={{width: priceWidth}}>{item.price}</td></Col>
-										<Col sm="auto"><td style={{width: actionButtonWidth}}>
-											<button onClick={() => launchProduct(item.productId, item.name)}>上架</button><br/>
+										<Col sm="auto" onClick={() => navigate("../../products/" + item.productId)}>
+											<div className="img-container" style={{height: imageHeight, width: imageWidth}}>
+												<img src={item.images[0]}/></div>
+										</Col>
+										<Col sm={3} className="border-column" onClick={() => navigate("../../products/" + item.productId)}>
+											商品名稱：<br/>{item.name}<br/>
+											商品價格：${item.price}
+										</Col>
+										<Col className="border-column" onClick={() => navigate("../../products/" + item.productId)}>
+											商品描述：<br/>{ item.extraDescription.length > 60 ?
+												item.extraDescription.substring(0, 60) + "..." : item.extraDescription }
+										</Col>
+										<Col sm="auto" className="button-column">
+											<button onClick={() => launchProduct(item.productId, item.name)}>上架</button>
 											<button onClick={() => navigate("../editproduct")}>編輯</button>
-										</td></Col>
+										</Col>
 									</Row>
 								</tr>
 							) : (
@@ -204,27 +203,26 @@ function Product() {
 
 				<div>已售出</div>
 				<Table striped bordered hover size="sm">
-					<thead style={{display: "block", width: "100%"}}>
-						<tr style={{display: "block"}}>
-							<Row style={{marginLeft: 0, marginRight: 17}}>
-								<Col sm="auto"><th style={{width: imageWidth}}>商品圖片</th></Col>
-								<Col><th>商品名稱</th></Col>
-								<Col sm="auto"><th style={{width: priceWidth}}>商品價格</th></Col>
-								<Col sm="auto"><th style={{width: actionButtonWidth}}>行動</th></Col>
-							</Row>
-						</tr>
-					</thead>
 					<tbody style={{overflowY: "scroll", height: tableHeight, display: "block"}}>
 						{soldOutProducts.length > 0 ?
-							soldOutProducts.map((item) => 
+							soldOutProducts.map((item) =>
 								<tr style={{display: "block"}}>
 									<Row style={{marginLeft: 0, marginRight: 0}}>
-										<Col sm="auto" onClick={() => navigate("../../product")}><td><img style={{width: imageWidth}} src={item.images[0]}/></td></Col>
-										<Col onClick={() => navigate("../../product")}><td>{item.name}</td></Col>
-										<Col sm="auto" onClick={() => navigate("../../product")}><td style={{width: priceWidth}}>{item.price}</td></Col>
-										<Col sm="auto"><td style={{width: actionButtonWidth}}>
-											<button onClick={() => launchProduct(item.productId, item.name)}>上架</button><br/>
-										</td></Col>
+										<Col sm="auto" onClick={() => navigate("../../products/" + item.productId)}>
+											<div className="img-container" style={{height: imageHeight, width: imageWidth}}>
+												<img src={item.images[0]}/></div>
+										</Col>
+										<Col sm={3} className="border-column" onClick={() => navigate("../../products/" + item.productId)}>
+											商品名稱：<br/>{item.name}<br/>
+											商品價格：${item.price}
+										</Col>
+										<Col className="border-column" onClick={() => navigate("../../products/" + item.productId)}>
+											商品描述：<br/>{ item.extraDescription.length > 60 ?
+												item.extraDescription.substring(0, 60) + "..." : item.extraDescription }
+										</Col>
+										<Col sm="auto" className="button-column">
+											<button onClick={() => launchProduct(item.productId, item.name)}>上架</button>
+										</Col>
 									</Row>
 								</tr>
 							) : (
