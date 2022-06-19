@@ -6,23 +6,31 @@ import {
 	ImageUploaderInput,
 	UploadIconWrapper,
 } from "./ImageUploaderElements";
-function ImageUploader(props) {
-	const uploadImage = () => {
+
+
+const ImageUploader = (props) => {
+
+	function uploadImage(props) {
+		
 		const r = new XMLHttpRequest();
 		const d = new FormData();
 		const e = document.getElementsByClassName("input-image")[0].files[0];
-		var u;
+		var url;
 
 		d.append("image", e);
 
 		r.open("POST", "https://api.imgur.com/3/image/");
 		r.setRequestHeader("Authorization", `Client-ID ${config.client}`);
 		r.onreadystatechange = function () {
+
 			if (r.status === 200 && r.readyState === 4) {
+
 				let res = JSON.parse(r.responseText);
-				u = `https://i.imgur.com/${res.data.id}.png`;
-				console.log(u);
-				props.setImages([u]);
+				url = `https://i.imgur.com/${res.data.id}.png`;
+				
+				props.setImages([...props.images, url])
+
+				// props.addDisplayImageDivs(props.displayImageDivs);
 
 				// const d = document.createElement("div");
 				// d.className = "image";
@@ -31,8 +39,8 @@ function ImageUploader(props) {
 				// const i = document.createElement("img");
 				// i.className = "image-src";
 				// i.src = u;
-				document.getElementsByClassName("image")[0].firstChild.src = u;
-				document.getElementsByClassName("uploadicon")[0].style.display = "none";
+				// document.getElementsByClassName("image")[0].firstChild.src = url;
+				// document.getElementsByClassName("uploadicon")[0].style.display = "none";
 
 				// const a = document.createElement("a");
 				// a.className = "image-link";
@@ -47,6 +55,7 @@ function ImageUploader(props) {
 		};
 		r.send(d);
 	};
+
 	return (
 		<ImageUploaderWrapper className="image">
 			<ImageUploaderUploadContent></ImageUploaderUploadContent>
@@ -69,9 +78,11 @@ function ImageUploader(props) {
 				type="file"
 				className="input-image"
 				accept="image/*"
-				onChange={() => uploadImage()}
+				onChange={() => uploadImage(props)}
 			/>
 		</ImageUploaderWrapper>
 	);
 }
+
+
 export default ImageUploader;

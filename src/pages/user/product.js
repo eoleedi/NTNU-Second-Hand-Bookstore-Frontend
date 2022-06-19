@@ -186,7 +186,7 @@ function Product() {
 										</Col>
 										<Col sm="auto" className="button-column">
 											<button onClick={() => launchProduct(item.productId, item.name)}>上架</button>
-											<button onClick={() => navigate("../editproduct")}>編輯</button>
+											<button onClick={() => navigate("../editproduct/" + item.productId)}>編輯</button>
 										</Col>
 									</Row>
 								</tr>

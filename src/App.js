@@ -41,7 +41,7 @@ function App() {
 						<Route path="password" element={<Password />} />
 						<Route path="product" element={<Product />} />
 						<Route path="list" element={<List />} />
-						<Route path="editproduct" element={<EditProduct />} />
+						<Route path="editproduct/:productId" element={<EditProduct />} />
 						<Route path="newproduct" element={<NewProduct />} />
 					</Route>
 					<Route path="/login" element={<Login />} />

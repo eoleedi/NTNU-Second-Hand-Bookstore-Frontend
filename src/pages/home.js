@@ -50,7 +50,7 @@ const Home = () => {
                 <h2>Top 10</h2>
             </div>
             <div id="my-carousel-container" className="my-carousel-container">
-                <Carousel show={show} lastSpace={productData.length*blockWidth-imageSpace-window.innerWidth*0.7}>
+                <Carousel show={show} lastSpace={productData.length*blockWidth-imageSpace-window.innerWidth*0.7+40}>
                     {
                         productData.map((products, index) => {
                             let padding = 0;
@@ -63,7 +63,7 @@ const Home = () => {
                                      onClick={ () => navigate("../products/" + products.productId) }
                                 >
                                     <div className="img-container" style={{height: imageHeight, width: imageWidth}}>
-                                        <img src={products.images[0]} alt='' style={{}}/>
+                                        <img src={products.images[0]} alt=''/>
                                     </div>
                                     <div className="product-name">{products.name}</div>
                                 </div>

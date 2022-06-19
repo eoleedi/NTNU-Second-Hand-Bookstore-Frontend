@@ -34,8 +34,8 @@ const ProductDetail = () => {
     
     async function updateLike() {
         await fetch(`https://ntnu.site/api/product/view?productId=${productId}`,{
-            method:"GET",
-            credentials:"include",
+            method: "GET",
+            credentials: "include",
             headers: {
                 "Content-Type": "application/json",
             },

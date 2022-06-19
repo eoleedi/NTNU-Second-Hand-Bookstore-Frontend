@@ -21,6 +21,8 @@
     overflow: hidden;
     width: 100%;
     height: 100%;
+    margin-left: 20px;
+    margin-right: 20px;
 }
 
 .carousel-content {
@@ -40,7 +42,7 @@
     /* flex-grow: 1; */
 }
 
-.carousel-content.show-2 > * {
+/* .carousel-content.show-2 > * {
     width: 50%;
 }
 
@@ -50,7 +52,7 @@
 
 .carousel-content.show-4 > * {
     width: calc(100% / 4);
-}
+} */
 
 .left-arrow, .right-arrow {
     position: absolute;
