@@ -12,7 +12,7 @@ import TableRow from '@mui/material/TableRow';
 
 
 
-const Comment = ({productId, NewData,addcom,setAddcom}) => {
+const Comment = ({productId, comments,addcom,setAddcom}) => {
     const[content, setContent] = useState('');
 
     async function handleComment() {
@@ -74,16 +74,16 @@ const Comment = ({productId, NewData,addcom,setAddcom}) => {
                     </TableRow>
                     </TableHead>
                     <TableBody>
-                    {NewData.comments.map((comments) => (
+                    { comments.map((comment) => (
                         <TableRow
-                        key={[comments.commentTime,comments.displayName]}
+                        key={[comment.commentTime,comment.displayName]}
                         sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                         >
                         <TableCell component="th" scope="row">
-                            {comments.displayName}
+                            {comment.displayName}
                         </TableCell>
-                        <TableCell align="right">{comments.content}</TableCell>
-                        <TableCell align="right">{comments.commentTime}</TableCell>
+                        <TableCell align="right">{comment.content}</TableCell>
+                        <TableCell align="right">{comment.commentTime}</TableCell>
                         
                         </TableRow>
                     ))}

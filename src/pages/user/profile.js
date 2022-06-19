@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+
 import UserSidebar from "../../components/UserSidebar";
 import "../../css/user.css";
 
 
 function Profile() {
-
+	
 	const [profile, setProfile] = useState(null);
+	
 	const navigate = useNavigate();
 
 	useEffect(() => {
@@ -19,8 +21,10 @@ function Profile() {
 				},
 			})
 				.then((response) => response.json())
-				.then((data) => {
-					setProfile(data.data);
+				.then((response) => {
+					if (response.status === "ok") {
+						setProfile(response.data);
+					}
 				})
 				.catch((err) => {
 					console.log(err);
@@ -28,6 +32,16 @@ function Profile() {
 		};
 		fetchInfo();
 	}, []);
+
+	//save data to localstorage
+    useEffect(()=>{
+        window.localStorage.setItem('USER_DATA',JSON.stringify(profile))
+    },[profile])
+
+	
+
+	
+
 
 	return (
 		<div className="member-page">
@@ -47,6 +61,7 @@ function Profile() {
 				<button type="button" onClick={() => navigate("../password")}>
 					修改密碼
 				</button>
+				
 			</div>
 		</div>
 	);
