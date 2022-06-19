@@ -276,17 +276,21 @@ const ProductDetail = () => {
                         {/* 賣家姓名：{NewData.sellerDisplayName}<br/> */}
                     </p>
                     
-                    <div className="Button">
-                        <button onClick={handleLike} className="Feature">
-                            <FontAwesomeIcon icon={faThumbsUp} />&nbsp;Like
-                        </button>
-                        <button onClick={handleUnlike} className="Feature">
-                            <FontAwesomeIcon icon={faThumbsDown} />&nbsp;Unlike
-                        </button>
-                        <button onClick={handleBuy} className="Feature">
-                            <FontAwesomeIcon icon={faBagShopping} />&nbsp;Buy
-                        </button>
-                    </div>
+                    {
+                        isLogin && (
+                            <div className="Button">
+                                <button onClick={handleLike} className="Feature">
+                                    <FontAwesomeIcon icon={faThumbsUp} />&nbsp;Like
+                                </button>
+                                <button onClick={handleUnlike} className="Feature">
+                                    <FontAwesomeIcon icon={faThumbsDown} />&nbsp;Unlike
+                                </button>
+                                <button onClick={handleBuy} className="Feature">
+                                    <FontAwesomeIcon icon={faBagShopping} />&nbsp;Buy
+                                </button>
+                            </div>
+                        )
+                    }
                 </div>
                 
             </div>
