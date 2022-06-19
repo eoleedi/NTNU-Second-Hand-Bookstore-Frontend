@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { IoIosNotifications, IoMdPerson } from "react-icons/io"
 import { useNavigate } from "react-router-dom";
+import {handleLogout} from "../../pages/user/profile"
+// import { useCookies } from 'react-cookie';
 // import { Nav, NavLink, NavMenu, PersonIcon } from "./TopBarElements";
 import "../../css/topbar.css";
 // import Search from '../../pages/search';
@@ -33,6 +35,9 @@ function Topbar() {
 	const [notificationsData, setNotification] = useState("");
 	const [searchText, setSearchText] = useState("");
 	const navigate = useNavigate();
+	const [ isLogin, setIsLogin ] = useState();
+	const [userData, setUserData] = useState([]);
+	// const [ cookies ] = useCookies();
 
 	async function fetchNotification() {
 		return fetch("https://ntnu.site/api/member/notifications", {
@@ -86,6 +91,34 @@ function Topbar() {
 		}
 		return (<> {notis} </>)
 	}
+	
+	async function handleLogout() {
+		window.localStorage.removeItem('USER_DATA');
+		return fetch(`https://ntnu.site/api/auth/session`, {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			mode: "cors",
+			credentials:"include",
+		})
+			.then((response) => response.json())
+			.then((response) => {
+				alert(response.message);
+				if (response.status === "ok") {
+					
+					setIsLogin(false)
+					
+				}
+				
+			})
+			.catch((error) => {
+				console.log(error);
+			});
+    
+    }
+
+	
 
 	return (
 		<div class="box">
@@ -98,6 +131,8 @@ function Topbar() {
 					<input type="search" id="search" placeholder="Search..." value={searchText} onChange={(e) => setSearchText(e.target.value)}></input>
 					<button class="icon" onClick={() => { navigate(`/products/search/${searchText}`) }}><i class="fa fa-search"></i></button>
 				</div>
+				{(<div onClick={handleLogout}>Logout</div>)}
+				{(<div onClick={()=>navigate("../../login")}>Login</div>)}
 				<button class="icon" onClick={ClickNotification}><IoIosNotifications /></button>
 				<button class="icon" onClick={() => {navigate("/user/profile")}}><IoMdPerson /></button>
 				{/* <div id='notification' class='notification'>

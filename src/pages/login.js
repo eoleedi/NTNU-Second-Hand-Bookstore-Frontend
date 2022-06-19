@@ -35,6 +35,7 @@ function page() {
 				console.log(response)
 				if (response.status !== "ok") {
 					alert(response.message);
+					
 				}
 				else {
 					alert("登入成功！跳轉至個人頁面。")
@@ -46,6 +47,7 @@ function page() {
 				// alert(error);
 			});
 	}
+
 
 	return (
 		<div class="page">

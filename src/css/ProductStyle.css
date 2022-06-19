@@ -90,13 +90,13 @@
     align-items: center;  */
     width:"30%";
     margin-left: 27%;
+    margin-top: 4%;
 }
 
 
 
-
-/* //change like button color
-.ChangeLike{
+/* //change like button color */
+/* .ChangeLike{
     min-width: 80px;
     background-color: rgb(236, 189, 189);
     border-radius: 8px;
@@ -108,9 +108,9 @@
     box-sizing: content-box;
     font-weight: 600;
     padding: 12px 12px;
-}
-//change button color
-.ChangeBuy{
+} */
+/* //change button color */
+/* .ChangeBuy{
     min-width: 80px;
     background-color: rgb(176, 223, 239);
     border-radius: 8px;
