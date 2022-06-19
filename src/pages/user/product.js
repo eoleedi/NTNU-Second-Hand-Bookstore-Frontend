@@ -157,7 +157,7 @@ function Product() {
 							) : (
 								<tr style={{display: "block"}}>
 									<Row style={{marginLeft: 0, marginRight: 0}}>
-										<Col><td>暫無商品</td></Col>
+										<Col><td>暫無商品，請新增商品!</td></Col>
 									</Row>
 								</tr>
 							)
@@ -193,7 +193,7 @@ function Product() {
 							) : (
 								<tr style={{display: "block"}}>
 									<Row style={{marginLeft: 0, marginRight: 0}}>
-										<Col><td>暫無商品</td></Col>
+										<Col><td>暫無商品，請新增商品!</td></Col>
 									</Row>
 								</tr>
 							)
@@ -228,7 +228,7 @@ function Product() {
 							) : (
 								<tr style={{display: "block"}}>
 									<Row style={{marginLeft: 0, marginRight: 0}}>
-										<Col><td>暫無商品</td></Col>
+										<Col><td>暫無商品，請新增商品!</td></Col>
 									</Row>
 								</tr>
 							)

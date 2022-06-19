@@ -13,6 +13,9 @@ class UserSidebar extends React.Component {
 		let style_product = {
 			background: "#897B7B",
 		};
+		let style_new_product ={
+			background:"#CEBDBD",
+		};
 		return (
 			<Nav>
 				<NavMenu>
@@ -25,6 +28,9 @@ class UserSidebar extends React.Component {
 					</NavLink>
 					<NavLink to="/user/product" style={style_product}>
 						我的商品
+					</NavLink>
+					<NavLink to="/user/newproduct" style={style_new_product}>
+						新增商品
 					</NavLink>
 				</NavMenu>
 			</Nav>

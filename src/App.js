@@ -15,16 +15,16 @@ import Profile from "./pages/user/profile";
 import Product from "./pages/user/product";
 import List from "./pages/user/list";
 import User from "./pages/user/index";
-import EditProfile from "./pages/user/edit";
-import Password from "./pages/user/password";
-import EditProduct from "./pages/user/editProduct";
-import NewProduct from "./pages/user/newProduct";
 import Login from "./pages/login";
 import Register from "./pages/register";
 import Rule from "./pages/rule";
 import FAQ from "./pages/FAQ";
 import About from './pages/About';
 import Contact from './pages/Contact';
+import Password from "./pages/user/password";
+import EditProfile from "./pages/user/edit";
+import EditProduct from "./pages/user/editProduct";
+import NewProduct from "./pages/user/newProduct";
 import ImageUploader from './components/ImageUploader/index.js';
 
 

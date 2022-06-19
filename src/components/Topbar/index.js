@@ -58,7 +58,7 @@ function Topbar() {
 	}
 
 	function ClickNotification() {
-		if (document.getElementById("notification").style.display == "none") {
+		if (document.getElementById("notification").style.display === "none") {
 			document.getElementById("notification").style.display = ''
 			
 		}

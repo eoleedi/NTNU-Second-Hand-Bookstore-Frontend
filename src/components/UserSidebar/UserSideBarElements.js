@@ -4,12 +4,13 @@ import styled from "styled-components";
 
 export const Nav = styled.nav`
 	background: #d9d9d9;
-	height: 100%;
+	height: 44rem;
 	width: 25rem;
 	z-index: 1; /* Stay on top */
 	top: 0; /* Stay at the top */
 	left: 0;
 	overflow-x: hidden; /* Disable horizontal scroll */
+	overflow-y: hidden;
 	padding-top: 60px; /* Place content 60px from the top */
 `;
 
@@ -30,7 +31,7 @@ export const NavLink = styled(Link)`
 
 export const PersonIcon = styled(IoMdPerson)`
 	color: #333333;
-	font-size: 15rem;
+	font-size: 12rem;
 	padding-bottom: 2rem;
 `;
 
