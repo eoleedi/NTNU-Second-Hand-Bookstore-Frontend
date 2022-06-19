@@ -34,9 +34,9 @@ function Topbar() {
 	const [notificationsData, setNotification] = useState("");
 	const [searchText, setSearchText] = useState("");
 	const navigate = useNavigate();
-	const [ isLogin, setIsLogin ] = useState();
+	const [ isLogin, setIsLogin ] = useState(true);
 	const [ cookies ] = useCookies();
-	if (!cookies.jwt) navigate("../../login");
+	// if (!cookies.jwt) navigate("../../login");
 
 	async function fetchNotification() {
 		return fetch("https://ntnu.site/api/member/notifications", {
@@ -106,7 +106,7 @@ function Topbar() {
 				if (response.status === "ok") {
 					
 					setIsLogin(!!cookies.jwt)
-					// navigate("../../login")
+					navigate("../../login")
 					
 				}
 				
@@ -130,8 +130,8 @@ function Topbar() {
 					<input type="search" id="search" placeholder="Search..." value={searchText} onChange={(e) => setSearchText(e.target.value)}></input>
 					<button class="icon" onClick={() => { navigate(`/products/search/${searchText}`) }}><i class="fa fa-search"></i></button>
 				</div>
-				{!isLogin &&(<div onClick={handleLogout}>Logout</div>)}
-				{isLogin &&(<div onClick={()=>navigate("../../login")}>Login</div>)}
+				{!isLogin&&(<div onClick={handleLogout}>Logout</div>)}
+				{isLogin&&(<div onClick={()=>navigate("../../login")}>Login</div>)}
 				<button class="icon" onClick={ClickNotification}><IoIosNotifications /></button>
 				<button class="icon" onClick={() => {navigate("/user/profile")}}><IoMdPerson /></button>
 				{/* <div id='notification' class='notification'>
