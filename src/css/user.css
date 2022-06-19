@@ -20,3 +20,19 @@ Table {
 tr {
     line-height: 1.5em;
 }
+
+img {
+    max-height: 100%;
+    max-width: 100%;
+    display: block;
+}
+
+.border-column {
+    border-right: 2px solid rgb(255, 225, 193);
+}
+
+.button-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}

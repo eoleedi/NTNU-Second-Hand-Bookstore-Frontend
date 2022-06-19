@@ -33,7 +33,7 @@ function page() {
 			.then((response) => response.json())
 			.then((response) => {
 				console.log(response)
-				if (response.status != "ok") {
+				if (response.status !== "ok") {
 					alert(response.message);
 				}
 				else {

@@ -38,7 +38,7 @@ function page() {
 			alert("請輸入聯絡電話。");
 			return
 		}
-		if (password.trim() != repassword.trim()) {
+		if (password.trim() !== repassword.trim()) {
 			alert("兩次輸入密碼不相同。");
 			return
 		}
@@ -59,7 +59,7 @@ function page() {
 		})
 			.then((response) => response.json())
 			.then((response) => {
-				if (response.status != "ok") {
+				if (response.status !== "ok") {
 					alert(response.message);
 				}
 				else {

@@ -21,11 +21,12 @@ import Rule from "./pages/rule";
 import FAQ from "./pages/FAQ";
 import About from './pages/About';
 import Contact from './pages/Contact';
-import Password from './pages/user/password';
-import EditProfile from './pages/user/edit';
-import EditProduct from './pages/user/editProduct';
-import NewProduct from './pages/user/newProduct';
-import ImageUploader from "./components/ImageUploader";
+import Password from "./pages/user/password";
+import EditProfile from "./pages/user/edit";
+import EditProduct from "./pages/user/editProduct";
+import NewProduct from "./pages/user/newProduct";
+import ImageUploader from './components/ImageUploader/index.js';
+
 
 function App() {
 	return (

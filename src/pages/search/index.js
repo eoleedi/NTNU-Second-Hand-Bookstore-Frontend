@@ -1,13 +1,15 @@
-import React, {useEffect, useState} from 'react';
-import {useParams} from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { useParams } from "react-router-dom";
 import { ChakraProvider } from '@chakra-ui/react'
 import { FontAwesomeIcon} from '@fortawesome/react-fontawesome'
-import {faBookOpenReader} from '@fortawesome/free-solid-svg-icons'
+import { faBookOpenReader } from '@fortawesome/free-solid-svg-icons'
 import "../../css/search.css";
-import Topbar from "../../components/Topbar";
 import Page from '../../components/SearchPage';
 import Pagination from '../../components/SearchPage/Pagination';
+
+
 const Search = () => {
+
   const {searchText} = useParams();
   const [Product, setProduct] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -52,7 +54,6 @@ const Search = () => {
 
   return (
     <ChakraProvider>
-    <Topbar/>
     <div className='description'>
       <p >search result for "{searchText}" &nbsp;<FontAwesomeIcon icon={faBookOpenReader} />&nbsp;...</p>
       
@@ -72,8 +73,6 @@ const Search = () => {
       
   );
 };
-
-
 
   
 export default Search;

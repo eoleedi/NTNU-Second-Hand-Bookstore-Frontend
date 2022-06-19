@@ -13,11 +13,11 @@ const Home = () => {
     const blockWidth  = imageWidth + imageSpace;
     const show        = Math.floor((window.innerWidth*0.7+imageSpace)/blockWidth)
 
-    const [ProductData, setProductData] = useState([]);
+    const [productData, setProductData] = useState([]);
 	const navigate = useNavigate();
 
     useEffect(() => {
-        const fetchData = async() =>{
+        const fetchData = async() => {
             await fetch("https://ntnu.site/api/product/", {
                 method: "GET",
                 credentials:"include",
@@ -40,6 +40,7 @@ const Home = () => {
         };
 
         fetchData();
+
     }, []);
 
     return (
@@ -49,17 +50,17 @@ const Home = () => {
                 <h2>Top 10</h2>
             </div>
             <div id="my-carousel-container" className="my-carousel-container">
-                <Carousel show={show} lastSpace={ProductData.length*blockWidth-imageSpace-window.innerWidth*0.7}>
+                <Carousel show={show} lastSpace={productData.length*blockWidth-imageSpace-window.innerWidth*0.7}>
                     {
-                        ProductData.map((products, index) => {
+                        productData.map((products, index) => {
                             let padding = 0;
-                            if (index+1 === ProductData.length) { padding = 0; }
+                            if (index+1 == productData.length) { padding = 0; }
                             else                               { padding = imageSpace; }
                             return (
                                 <div className="column"
                                      key={ products.productId }
                                      style={{width: imageWidth, marginRight: padding}}
-                                     onClick={ () => navigate("../products/" + products.productId) } //change product to products
+                                     onClick={ () => navigate("../products/" + products.productId) }
                                 >
                                     <div className="img-container" style={{height: imageHeight, width: imageWidth}}>
                                         <img src={products.images[0]} alt='' style={{}}/>
