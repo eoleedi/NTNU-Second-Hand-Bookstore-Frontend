@@ -173,7 +173,7 @@ const ProductDetail = () =>  {
         
         return (
             <div>
-                <Topbar />      
+                {/* <Topbar />       */}
                 <h2>Loading...</h2>
             </div>
         )
@@ -183,7 +183,7 @@ const ProductDetail = () =>  {
     {
         return (
             <div>
-                <Topbar />   
+                {/* <Topbar />    */}
                 <div className="MainContainer" >
                     
                     <div className="ProductPreview" >

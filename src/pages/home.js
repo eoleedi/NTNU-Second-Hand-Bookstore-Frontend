@@ -27,7 +27,7 @@ const Home = () => {
             })
             .then((response) => response.json())
             .then((response) => {
-                if (response.status != "ok") {
+                if (response.status !== "ok") {
                     alert(response.message);
                 }
                 else {
@@ -53,13 +53,13 @@ const Home = () => {
                     {
                         ProductData.map((products, index) => {
                             let padding = 0;
-                            if (index+1 == ProductData.length) { padding = 0; }
+                            if (index+1 === ProductData.length) { padding = 0; }
                             else                               { padding = imageSpace; }
                             return (
                                 <div className="column"
                                      key={ products.productId }
                                      style={{width: imageWidth, marginRight: padding}}
-                                     onClick={ () => navigate("../product/" + products.productId) }
+                                     onClick={ () => navigate("../products/" + products.productId) } //change product to products
                                 >
                                     <div className="img-container" style={{height: imageHeight, width: imageWidth}}>
                                         <img src={products.images[0]} alt='' style={{}}/>

@@ -1,10 +1,12 @@
 import React from "react";
 // import logo from './logo.svg';
+import {useNavigate} from "react-router-dom";
 import styles from "../../css/editProduct.module.css";
 import StarRating from "../../components/Rating";
 import ImageUploader from "../../components/ImageUploader";
 
 class NewProduct extends React.Component {
+	
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -40,7 +42,44 @@ class NewProduct extends React.Component {
 		this.setState({ ["images"]: images });
 	}
 
-	save() {
+	save() { //save new product
+		// fetch("https://ntnu.site/api/member/products/new", {
+		// 	method: "POST",
+		// 	headers: {
+		// 		"Content-Type": "application/json",
+		// 	},
+		// 	credentials: "include",
+		// 	body: JSON.stringify({
+		// 		ISBN: this.state.isbn,
+		// 		name: this.state.productName,
+		// 		price: isNaN(parseInt(this.state.price))
+		// 			? 0
+		// 			: parseInt(this.state.price),
+		// 		images: this.state.images,
+		// 		condition: this.state.condition,
+		// 		noted: this.state.noted,
+		// 		location: this.state.location,
+		// 		language: this.state.language,
+		// 		extraDescription: this.state.description,
+		// 	}),
+		// })
+		// 	.then((response) => response.json())
+		// 	.then((response) => {
+		// 		if (response.status != "ok") {
+		// 			alert(response.message);
+		// 		}
+		// 		else {
+		// 			const navigate = useNavigate();
+		// 			alert("商品新增成功！");
+		// 			navigate("../product");
+		// 			// resetLists();
+		// 		}
+		// 	})
+		// 	.catch((err) => {
+		// 		console.log(err);
+		// 	});
+	}
+	launch() {
 		fetch("https://ntnu.site/api/member/products/new", {
 			method: "POST",
 			headers: {
@@ -61,12 +100,22 @@ class NewProduct extends React.Component {
 				extraDescription: this.state.description,
 			}),
 		})
+			.then((response) => response.json())
 			.then((response) => {
-				console.log(response);
+				if (response.status != "ok") {
+					alert(response.message);
+				}
+				else {
+					const navigate = useNavigate();
+					alert("商品新增成功！");
+					navigate("../product");
+					// resetLists();
+				}
 			})
-			.catch((error) => console.log(error));
+			.catch((err) => {
+				console.log(err);
+			});
 	}
-	launch() {}
 	render() {
 		const inputStyle = {
 			display: "block",

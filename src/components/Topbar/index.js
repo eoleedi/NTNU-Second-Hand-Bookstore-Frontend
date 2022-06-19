@@ -44,7 +44,7 @@ function Topbar() {
 		})
 			.then((response) => response.json())
 			.then((response) => {
-				if (response.status != "ok") {
+				if (response.status !== "ok") {
 					alert(response.message)
 				}
 				else {
@@ -58,7 +58,7 @@ function Topbar() {
 	}
 
 	function ClickNotification() {
-		if (document.getElementById("notification").style.display == "none") {
+		if (document.getElementById("notification").style.display === "none") {
 			document.getElementById("notification").style.display = ''
 			
 		}

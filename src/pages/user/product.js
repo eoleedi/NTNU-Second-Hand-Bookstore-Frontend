@@ -145,9 +145,9 @@ function Product() {
 							forSaleProducts.map((item) => 
 								<tr style={{display: "block"}}>
 									<Row style={{marginLeft: 0, marginRight: 0}}>
-										<Col sm="auto" onClick={() => navigate("../../product")}><td><img style={{width: imageWidth}} src={item.images[0]}/></td></Col>
-										<Col onClick={() => navigate("../../product")}><td>{item.name}</td></Col>
-										<Col sm="auto" onClick={() => navigate("../../product")}><td style={{width: priceWidth}}>{item.price}</td></Col>
+										<Col sm="auto" onClick={() => navigate("../../products/" + item.productId)}><td><img style={{width: imageWidth}} src={item.images[0]}/></td></Col>
+										<Col onClick={() => navigate("../../products/" + item.productId)}><td>{item.name}</td></Col>
+										<Col sm="auto" onClick={() => navigate("../../products/" + item.productId)}><td style={{width: priceWidth}}>{item.price}</td></Col>
 										<Col sm="auto"><td style={{width: actionButtonWidth}}>
 											<button onClick={() => discontinueProduct(item.productId, item.name)}>下架</button><br/>
 											<button onClick={() => outOfStockProduct(item.productId, item.name)}>標示為售出</button>
@@ -157,7 +157,7 @@ function Product() {
 							) : (
 								<tr style={{display: "block"}}>
 									<Row style={{marginLeft: 0, marginRight: 0}}>
-										<Col><td>暫無商品</td></Col>
+										<Col><td>暫無商品，請新增商品!</td></Col>
 									</Row>
 								</tr>
 							)
@@ -182,9 +182,9 @@ function Product() {
 							editingProducts.map((item) => 
 								<tr style={{display: "block"}}>
 									<Row style={{marginLeft: 0, marginRight: 0}}>
-										<Col sm="auto" onClick={() => navigate("../../product")}><td><img style={{width: imageWidth}} src={item.images[0]}/></td></Col>
-										<Col onClick={() => navigate("../../product")}><td>{item.name}</td></Col>
-										<Col sm="auto" onClick={() => navigate("../../product")}><td style={{width: priceWidth}}>{item.price}</td></Col>
+										<Col sm="auto" onClick={() => navigate("../../products/" + item.productId)}><td><img style={{width: imageWidth}} src={item.images[0]}/></td></Col>
+										<Col onClick={() => navigate("../../products/" + item.productId)}><td>{item.name}</td></Col>
+										<Col sm="auto" onClick={() => navigate("../../products/" + item.productId)}><td style={{width: priceWidth}}>{item.price}</td></Col>
 										<Col sm="auto"><td style={{width: actionButtonWidth}}>
 											<button onClick={() => launchProduct(item.productId, item.name)}>上架</button><br/>
 											<button onClick={() => navigate("../editproduct")}>編輯</button>
@@ -194,7 +194,7 @@ function Product() {
 							) : (
 								<tr style={{display: "block"}}>
 									<Row style={{marginLeft: 0, marginRight: 0}}>
-										<Col><td>暫無商品</td></Col>
+										<Col><td>暫無商品，請新增商品!</td></Col>
 									</Row>
 								</tr>
 							)
@@ -219,9 +219,9 @@ function Product() {
 							soldOutProducts.map((item) => 
 								<tr style={{display: "block"}}>
 									<Row style={{marginLeft: 0, marginRight: 0}}>
-										<Col sm="auto" onClick={() => navigate("../../product")}><td><img style={{width: imageWidth}} src={item.images[0]}/></td></Col>
-										<Col onClick={() => navigate("../../product")}><td>{item.name}</td></Col>
-										<Col sm="auto" onClick={() => navigate("../../product")}><td style={{width: priceWidth}}>{item.price}</td></Col>
+										<Col sm="auto" onClick={() => navigate("../../products/" + item.productId)}><td><img style={{width: imageWidth}} src={item.images[0]}/></td></Col>
+										<Col onClick={() => navigate("../../products/" + item.productId)}><td>{item.name}</td></Col>
+										<Col sm="auto" onClick={() => navigate("../../products/" + item.productId)}><td style={{width: priceWidth}}>{item.price}</td></Col>
 										<Col sm="auto"><td style={{width: actionButtonWidth}}>
 											<button onClick={() => launchProduct(item.productId, item.name)}>上架</button><br/>
 										</td></Col>
@@ -230,7 +230,7 @@ function Product() {
 							) : (
 								<tr style={{display: "block"}}>
 									<Row style={{marginLeft: 0, marginRight: 0}}>
-										<Col><td>暫無商品</td></Col>
+										<Col><td>暫無商品，請新增商品!</td></Col>
 									</Row>
 								</tr>
 							)

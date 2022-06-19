@@ -23,7 +23,7 @@ function Password() {
 			alert("請輸入確認密碼。");
 			return
 		}
-		if (newPassword.trim() != confirmPassword.trim()) {
+		if (newPassword.trim() !== confirmPassword.trim()) {
 			alert("兩次輸入密碼不相同。");
 			return
 		}
@@ -40,7 +40,7 @@ function Password() {
 		})
 			.then((response) => response.json())
 			.then((response) => {
-				if (response.status != "ok") {
+				if (response.status !== "ok") {
 					alert(response.message);
 				}
 				else {
