@@ -137,7 +137,6 @@ const test = () => {
 		fetchProductData();
 	}, []);
 
-
 	useEffect(() => {
 		const displayImageDivsTmp = images.map((image, index) => {
 			return (

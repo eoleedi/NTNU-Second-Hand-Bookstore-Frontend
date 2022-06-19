@@ -138,7 +138,14 @@ function Product() {
 									<Row style={{marginLeft: 0, marginRight: 0}}>
 										<Col sm="auto" onClick={() => navigate("../../products/" + item.productId)}>
 											<div className="img-container" style={{height: imageHeight, width: imageWidth}}>
-												<img src={item.images[0]} alt=""/></div>
+												{
+													item.images.length > 0 ? (
+														<img src={item.images[0]} alt=''/>
+													) : (
+														<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXd5451e837N2pG4biVWIzg3IV-DeCTG4STHw3BwpBhQI2CyyZRKiTyc3MRaZRGohKcLE&usqp=CAU" alt=''/>
+													)
+												}
+											</div>
 										</Col>
 										<Col sm={3} className="border-column" onClick={() => navigate("../../products/" + item.productId)}>
 											商品名稱：<br/>{item.name}<br/>
@@ -174,7 +181,14 @@ function Product() {
 									<Row style={{marginLeft: 0, marginRight: 0}}>
 										<Col sm="auto" onClick={() => navigate("../../products/" + item.productId)}>
 											<div className="img-container" style={{height: imageHeight, width: imageWidth}}>
-												<img src={item.images[0]} alt=""/></div>
+												{
+													item.images.length > 0 ? (
+														<img src={item.images[0]} alt=''/>
+													) : (
+														<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXd5451e837N2pG4biVWIzg3IV-DeCTG4STHw3BwpBhQI2CyyZRKiTyc3MRaZRGohKcLE&usqp=CAU" alt=''/>
+													)
+												}
+											</div>
 										</Col>
 										<Col sm={3} className="border-column" onClick={() => navigate("../../products/" + item.productId)}>
 											商品名稱：<br/>{item.name}<br/>
@@ -210,7 +224,14 @@ function Product() {
 									<Row style={{marginLeft: 0, marginRight: 0}}>
 										<Col sm="auto" onClick={() => navigate("../../products/" + item.productId)}>
 											<div className="img-container" style={{height: imageHeight, width: imageWidth}}>
-												<img src={item.images[0]} alt=""/></div>
+												{
+													item.images.length > 0 ? (
+														<img src={item.images[0]} alt=''/>
+													) : (
+														<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXd5451e837N2pG4biVWIzg3IV-DeCTG4STHw3BwpBhQI2CyyZRKiTyc3MRaZRGohKcLE&usqp=CAU" alt=''/>
+													)
+												}
+											</div>
 										</Col>
 										<Col sm={3} className="border-column" onClick={() => navigate("../../products/" + item.productId)}>
 											商品名稱：<br/>{item.name}<br/>
