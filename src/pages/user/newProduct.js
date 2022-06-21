@@ -1,5 +1,6 @@
 import React,{ useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useCookies } from 'react-cookie';
 import styles from "../../css/editProduct.module.css";
 import StarRating from "../../components/Rating";
 import ImageUploader from "../../components/ImageUploader";
@@ -20,6 +21,7 @@ const NewProduct = () => {
     const [ extraDescription, setExtraDescription ] = useState('');
 	const [ displayImageDivs, setDisplayImageDivs ] = useState([]);
 
+	const [ cookies ] = useCookies();
 	const navigate = useNavigate();
 
 	const imageHeight = 300;
@@ -61,26 +63,31 @@ const NewProduct = () => {
 	}
 
 	useEffect(() => {
-		const displayImageDivsTmp = images.map((image, index) => {
-			return (
-				<div key={index} className="column" style={{width: imageWidth}} >
+
+		if (!cookies.jwt) navigate("../../login");
+		else {
+			const displayImageDivsTmp = images.map((image, index) => {
+				return (
+					<div key={index} className="column" style={{width: imageWidth}} >
+						<div className="img-container" style={{height: imageHeight, width: imageWidth}}>
+							<img src={image} alt=""/>
+						</div>
+					</div>
+				)
+			})
+			displayImageDivsTmp.push(
+				<div key={100} className="column" style={{width: imageWidth}}>
 					<div className="img-container" style={{height: imageHeight, width: imageWidth}}>
-						<img src={image} alt=""/>
+						<ImageUploader className="image-uploader"
+									setImages={setImages}
+									images={images}
+									displayImageDivs={displayImageDivsTmp}/>
 					</div>
 				</div>
 			)
-		})
-		displayImageDivsTmp.push(
-			<div key={100} className="column" style={{width: imageWidth}}>
-				<div className="img-container" style={{height: imageHeight, width: imageWidth}}>
-					<ImageUploader className="image-uploader"
-								   setImages={setImages}
-								   images={images}
-								   displayImageDivs={displayImageDivsTmp}/>
-				</div>
-			</div>
-		)
-		setDisplayImageDivs(displayImageDivsTmp)
+			setDisplayImageDivs(displayImageDivsTmp);
+		}
+
 	}, [ images ])
 
 	

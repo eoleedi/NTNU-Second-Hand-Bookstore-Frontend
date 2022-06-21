@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useCookies } from 'react-cookie';
 import { Table } from 'react-bootstrap';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -14,12 +15,15 @@ function List() {
 	const imageWidth  = imageHeight * 3 / 4;
 	const tableHeight = 400;
 
-	const [collection, setCollection] = useState([]);
-	const [history, setHistory] = useState([]);
+	const [ collection, setCollection ] = useState([]);
+	const [ history   , setHistory    ] = useState([]);
+
+	const [ cookies ] = useCookies();
 	const navigate = useNavigate();
 
 
 	useEffect(() => {
+
 		const fetchlist = async () => {
 			await fetch("https://ntnu.site/api/member/lists", {
 				method: "GET",
@@ -42,7 +46,10 @@ function List() {
 					console.log(err);
 				});
 		};
-		fetchlist();
+
+		if (!cookies.jwt) navigate("../../login");
+		else fetchlist();
+		
 	}, []);
 
 
@@ -77,8 +84,10 @@ function List() {
 									</Row>
 								</tr>
 							) : (
-								<tr>
-									<td colSpan={4}>暫無商品</td>
+								<tr style={{display: "block"}}>
+									<Row style={{marginLeft: 0, marginRight: 0}}>
+										<Col><td>暫無喜愛過的商品！</td></Col>
+									</Row>
 								</tr>
 							)
 						}
@@ -112,8 +121,10 @@ function List() {
 									</Row>
 								</tr>
 							) : (
-								<tr>
-									<td colSpan={4}>暫無商品</td>	
+								<tr style={{display: "block"}}>
+									<Row style={{marginLeft: 0, marginRight: 0}}>
+										<Col><td>暫無看過的商品！</td></Col>
+									</Row>
 								</tr>
 							)
 						}

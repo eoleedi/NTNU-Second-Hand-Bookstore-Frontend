@@ -4,6 +4,7 @@ import { ChakraProvider } from '@chakra-ui/react'
 import { FontAwesomeIcon} from '@fortawesome/react-fontawesome'
 import { faBookOpenReader } from '@fortawesome/free-solid-svg-icons'
 import "../../css/search.css";
+import "../../css/imagestyle.css";
 import Page from '../../components/SearchPage';
 import Pagination from '../../components/SearchPage/Pagination';
 
@@ -50,27 +51,24 @@ const Search = () => {
   const currentPosts = Product.slice(indexOfFirstPost, indexOfLastPost);
 
   //change page
-  const paginate =(pageNumber) => setCurrentPage(pageNumber);
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <ChakraProvider>
-    <div className='description'>
-      <p >search result for "{searchText}" &nbsp;<FontAwesomeIcon icon={faBookOpenReader} />&nbsp;...</p>
-      
-    </div>
-    
-    <div className='result'>
-      <Page Product={currentPosts} loading={loading}/>
-      <Pagination 
-          postsPerPage={postsPerPage} 
-          totalPosts={Product.length} 
-          paginate={paginate}
-      />
-    </div>
-      
-      
+      <div className="index-page">
+        <div className="description" style={{marginBottom: 20}}>
+          <p >search result for "{searchText}" &nbsp;<FontAwesomeIcon icon={faBookOpenReader} />&nbsp;...</p>
+        </div>
+        <div className="result">
+          <Page Product={currentPosts} loading={loading}/>
+          <Pagination 
+              postsPerPage={postsPerPage} 
+              totalPosts={Product.length} 
+              paginate={paginate}
+          />
+        </div>
+      </div>
     </ChakraProvider>
-      
   );
 };
 

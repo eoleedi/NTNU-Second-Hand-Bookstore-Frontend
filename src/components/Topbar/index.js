@@ -1,33 +1,10 @@
 import React, { useState,useEffect } from "react";
-import { IoIosNotifications, IoMdPerson } from "react-icons/io"
+import { IoMdLogIn, IoMdLogOut, IoIosNotifications, IoMdPerson } from "react-icons/io"
 import { useNavigate } from "react-router-dom";
 import { Table } from 'react-bootstrap';
-import { handleLogout } from "../../pages/user/profile"
+// import { handleLogout } from "../../pages/user/profile"
 import { useCookies } from 'react-cookie';
-// import { Nav, NavLink, NavMenu, PersonIcon } from "./TopBarElements";
 import "../../css/topbar.css";
-// import Search from '../../pages/search';
-
-// class Topbar extends React.Component {
-// 	render() {
-// 		return (
-// 			<>
-// 			<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"></link>
-// 				<div class="box">
-// 					<div class="container-2">
-// 						<a class="title" href="#"><img src="../../logo192.png" width="35px" color="#262626"></img>二手書交易平台</a>
-// 					</div>
-// 					<div class="container-1">
-// 						<input type="search" id="search" placeholder="Search..." />
-// 						<button class="icon" onClick={console.log("search")}><i class="fa fa-search"></i></button>
-// 					</div>
-// 					<button class="icon"><IoIosNotifications /></button>
-// 					<button class="icon"><IoMdPerson /></button>
-// 				</div>
-// 			</>
-// 		);
-// 	}
-// }
 
 
 function Topbar() {
@@ -46,7 +23,7 @@ function Topbar() {
 		url += "?read=" + read
 		if (!!lastTimestamp) url += "&timestamp=" + lastTimestamp;
 
-		return fetch(url, {
+		await fetch(url, {
 			method: "GET",
 			headers: {
 				"Content-Type": "application/json",
@@ -59,7 +36,7 @@ function Topbar() {
 					alert(response.message)
 				}
 				else {
-					setNotifications([...notifications, ...response.data.notifications])
+					setNotifications([...response.data.notifications, ...notifications])
 					setLastTimestamp(response.data.timestamp)
 				}
 			})
@@ -69,25 +46,27 @@ function Topbar() {
 	}
 
 	function ClickNotificationIcon() {
-		if (document.getElementById("notification").style.display === "none") {
-			fetchNotification(true)
-			document.getElementById("notification").style.display = ''
+		if (isLogin) {
+			if (document.getElementById("notification").style.display === "none") {
+				fetchNotification(true)
+				document.getElementById("notification").style.display = ''
+			}
+			else {
+				notifications.forEach((notification) => {
+					notification.read = true
+				})
+				document.getElementById("notification").style.display = "none"
+			}
 		}
 		else {
-			// for (let notification in notifications) {
-			// 	notification.read = true
-			// }
-			notifications.forEach((notification) => {
-				notification.read = true
-			})
-			document.getElementById("notification").style.display = "none"
+			alert("通知功能僅限登入用戶。")
 		}
 	}
 
 	useEffect(() => {
 		setIsLogin(!!cookies.jwt);
 		if (!!cookies.jwt) fetchNotification(false);
-	}, [])
+	}, [ cookies ])
 	
 	async function handleLogout() {
 		await fetch("https://ntnu.site/api/auth/session", {
@@ -101,8 +80,10 @@ function Topbar() {
 			.then((response) => {
 				alert(response.message);
 				if (response.status === "ok") {
-					setIsLogin(!!cookies.jwt)
-					navigate("../../login")
+					setIsLogin(false)
+					navigate("../../")
+					// window.location.reload();
+					document.getElementById("notification").style.display = "none"
 				}
 			})
 			.catch((error) => {
@@ -122,13 +103,20 @@ function Topbar() {
 					<input type="search" id="search" placeholder="Search..." value={searchText} onChange={(e) => setSearchText(e.target.value)}></input>
 					<button class="icon" onClick={() => { navigate(`/products/search/${searchText}`) }}><i class="fa fa-search"></i></button>
 				</div>
-				{!isLogin&&(<div onClick={handleLogout}>Logout</div>)}
-				{isLogin&&(<div onClick={()=>navigate("../../login")}>Login</div>)}
+
+				{ 
+					isLogin ? (
+						<div class="icon" onClick={handleLogout}><IoMdLogOut/></div>
+					) : (
+						<div class="icon" onClick={() => navigate("../../login")}><IoMdLogIn/></div>
+					)
+				}
+				
 				<button class="icon" onClick={ClickNotificationIcon}><IoIosNotifications/></button>
 				<button class="icon" onClick={() => {navigate("/user/profile")}}><IoMdPerson/></button>
 				<div style={{width: 20}}></div>
 				<div style={{width: 0}}>
-					<div id="notification" class="notification">
+					<div id="notification" class="notification" style={{display: "none"}}>
 						<Table striped bordered hover size="sm" style={{marginBottom: 0}}>
 							{
 								notifications.length > 0 ?

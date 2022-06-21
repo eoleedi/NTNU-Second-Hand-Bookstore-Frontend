@@ -10,8 +10,6 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 
 
-
-
 const Comment = ({productId, comments,addcom,setAddcom}) => {
     const[content, setContent] = useState('');
 
@@ -65,28 +63,27 @@ const Comment = ({productId, comments,addcom,setAddcom}) => {
                 <button className='Feature' onClick={handleComment}> Add comment</button>
             </form>
             <TableContainer sx={{height: 200,overflowX: "hidden"}}>
-                <Table stickyHeader sx={{ height: "max-content",minWidth: 650 }} size="small" aria-label="a dense table">
+                <Table stickyHeader sx={{ height: "max-content", minWidth: 650 }} size="small" aria-label="a dense table">
                     <TableHead>
                     <TableRow>
-                        <TableCell>User Name</TableCell>
-                        <TableCell align="right">Content</TableCell>
-                        <TableCell align="right">Comment Time</TableCell>
+                        <TableCell>用戶暱稱</TableCell>
+                        <TableCell>留言內容</TableCell>
+                        <TableCell>時間</TableCell>
                     </TableRow>
                     </TableHead>
                     <TableBody>
-                    { comments.map((comment) => (
-                        <TableRow
-                        key={[comment.commentTime,comment.displayName]}
-                        sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                        >
-                        <TableCell component="th" scope="row">
-                            {comment.displayName}
-                        </TableCell>
-                        <TableCell align="right">{comment.content}</TableCell>
-                        <TableCell align="right">{comment.commentTime}</TableCell>
-                        
-                        </TableRow>
-                    ))}
+                    {
+                        comments.map((comment) => (
+                            <TableRow
+                                key={[comment.commentTime,comment.displayName]}
+                                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                            >
+                                <TableCell component="th" scope="row">{comment.displayName}</TableCell>
+                                <TableCell>{comment.content}</TableCell>
+                                <TableCell>{comment.commentTime}</TableCell>
+                            </TableRow>
+                        ))
+                    }
                     </TableBody>
                 </Table>
             </TableContainer>          

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import '../../css/carousel.css'
 
+
 const Carousel = (props) => {
 
     const {children, show, lastSpace, imageWidth} = props

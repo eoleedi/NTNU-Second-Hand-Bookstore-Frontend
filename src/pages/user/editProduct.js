@@ -13,8 +13,7 @@ const test = () => {
 
 	const [ cookies ] = useCookies();
     const navigate = useNavigate();
-	if (!cookies.jwt) navigate("../../login");
-
+	
     const { productId } = useParams();
 	const [ ISBN            , setISBN             ] = useState('');
 	const [ name            , setName             ] = useState('');
@@ -26,7 +25,7 @@ const test = () => {
     const [ language        , setLanguage         ] = useState('');
     const [ extraDescription, setExtraDescription ] = useState('');
 	const [ displayImageDivs, setDisplayImageDivs ] = useState([]);
-
+	
 	const imageHeight = 300;
 	const imageWidth  = imageHeight * 3 / 4;
 
@@ -105,7 +104,8 @@ const test = () => {
     // };
 
 	useEffect(() => {
-        const fetchProductData = async() => {
+
+		const fetchProductData = async() => {
             await fetch(`https://ntnu.site/api/product/view?productId=${productId}`,{
                 method: "GET",
                 credentials: "include",
@@ -134,7 +134,41 @@ const test = () => {
                 console.log(err);
             });
         };
-		fetchProductData();
+
+		const checkAccess = async() => {
+            await fetch("https://ntnu.site/api/member/products",{
+                method: "GET",
+                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+            })
+            .then((response) => response.json())
+            .then((response) => {
+                console.log(response)
+                if (response.status !== "ok") {
+                    alert(response.message);
+                }
+                else {
+					let access = false;
+                    response.data.editingProducts.map((product) => {
+                        if (productId == product.productId) access = true;
+                    })
+					if (!access) {
+						alert("該商品不屬於您或非未上架狀態。");
+						navigate("../product");
+					}
+					else fetchProductData();
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+        };
+		
+		if (!cookies.jwt) navigate("../../login");
+		else checkAccess();
+
 	}, []);
 
 	useEffect(() => {

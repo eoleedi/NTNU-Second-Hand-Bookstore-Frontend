@@ -33,8 +33,10 @@ const ProductDetail = () => {
     const [ location         , setLocation         ] = useState('');
     const [ sellerDisplayName, setSellerDisplayName] = useState('');
     const [ comments         , setComments         ] = useState([]);
+    const [ forSale          , setForSale          ] = useState(true);
+    const [ soldOut          , setSoldOut          ] = useState(false);
+    
     const [ addcom           , setAddcom           ] = useState(false);
-
     const [ cookies ] = useCookies();
     const [ isLogin, setIsLogin ] = useState(false);
     const [ liked  , setLiked   ] = useState(false);
@@ -99,6 +101,8 @@ const ProductDetail = () => {
                     setLocation(response.data.details.location);
                     setSellerDisplayName(response.data.details.sellerDisplayName);
                     setComments(response.data.details.comments)
+                    setForSale(response.data.details.forSale)
+                    setSoldOut(response.data.details.soldOut)
                 }
             })
             .catch((err) => {
@@ -251,7 +255,7 @@ const ProductDetail = () => {
         <div className="MainContainer">
             <div className="SubContainer">
                 <div id="carousel-container" className="carousel-container"
-                        style={{height: imageHeight, width: imageWidth+40, marginLeft: 40, marginRight: 80}}>
+                        style={{height: imageHeight, width: imageWidth+40, marginLeft: 40, marginRight: 80, marginBottom: 60}}>
                     <Carousel show={1} imageWidth={imageWidth}>
                         {
                             images.length > 0 ? (
@@ -285,7 +289,7 @@ const ProductDetail = () => {
                     <p className="ProductDescription">
                         ISBN 號碼：{ISBN}<br/>
                         商品語言：{language}<br/>
-                        商品新舊程度：{condition} 成新<br/>
+                        商品新舊程度：{condition == 10 ? ("全新") : ( condition + " 成新" ) }<br/>
                         商品有無筆記：{noted ? "有" : "無"}<br/>
                         賣家地點：{location}<br/>
                         賣家暱稱：{sellerDisplayName}<br/>
@@ -297,17 +301,21 @@ const ProductDetail = () => {
                                 {
                                     liked ? (
                                         <button onClick={handleUnlike} className="Feature">
-                                            <FontAwesomeIcon icon={faThumbsDown} />&nbsp;Unlike
+                                            <FontAwesomeIcon icon={faThumbsDown}/>&nbsp;Unlike
                                         </button>
                                     ) : (
                                         <button onClick={handleLike} className="Feature">
-                                            <FontAwesomeIcon icon={faThumbsUp} />&nbsp;Like
+                                            <FontAwesomeIcon icon={faThumbsUp}/>&nbsp;Like
                                         </button>
                                     )
                                 }
-                                <button onClick={handleBuy} className="Feature">
-                                    <FontAwesomeIcon icon={faBagShopping} />&nbsp;Buy
-                                </button>
+                                {
+                                    forSale && !soldOut && (
+                                        <button onClick={handleBuy} className="Feature">
+                                            <FontAwesomeIcon icon={faBagShopping}/>&nbsp;Buy
+                                        </button>
+                                    )
+                                }
                             </div>
                         )
                     }
@@ -315,7 +323,7 @@ const ProductDetail = () => {
             </div>
             
             {
-                isLogin && (
+                forSale && !soldOut && isLogin && (
                     <div className="CommentArea">
                         <form>                 
                             <h3 >Leave some comments below if you have any question! &nbsp;<FontAwesomeIcon icon={faComment}/></h3>
@@ -340,13 +348,13 @@ const ProductDetail = () => {
                 )
             }
     
-            <TableContainer sx={{ma: 200, overflowX: "hidden"}}>
+            <TableContainer sx={{ma: 200, overflowX: "hidden"}} style={{height: "100%", border: "1px", borderStyle: "dashed"}}>
                 <Table stickyHeader sx={{ height: "max-content", minWidth: 650}} size="small" aria-label="a dense table">
                     <TableHead>
                     <TableRow>
-                        <TableCell>User Name</TableCell>
-                        <TableCell>Content</TableCell>
-                        <TableCell>Comment Time</TableCell>
+                        <TableCell>用戶暱稱</TableCell>
+                        <TableCell>留言內容</TableCell>
+                        <TableCell>時間</TableCell>
                     </TableRow>
                     </TableHead>
                     <TableBody>
@@ -356,9 +364,7 @@ const ProductDetail = () => {
                                     key={[comment.commentTime,comment.displayName]}
                                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                                 >
-                                    <TableCell component="th" scope="row">
-                                        {comment.displayName}
-                                    </TableCell>
+                                    <TableCell component="th" scope="row">{comment.displayName}</TableCell>
                                     <TableCell>{comment.content}</TableCell>
                                     <TableCell>{comment.commentTime}</TableCell>
                                 </TableRow>

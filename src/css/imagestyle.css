@@ -32,6 +32,10 @@
     border-radius: 5%;
 }
 
+.img-container > img {
+    border-radius: 5%;
+}
+
 img {
     max-height: 100%;
     max-width: 100%;

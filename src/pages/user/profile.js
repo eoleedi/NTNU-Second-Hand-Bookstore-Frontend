@@ -7,13 +7,12 @@ import "../../css/user.css";
 
 function Profile() {
 	
-	const [profile, setProfile] = useState(null);
-	
+	const [ profile, setProfile ] = useState(null);
 	const [ cookies ] = useCookies();
     const navigate = useNavigate();
-	// if (!cookies.jwt) navigate("../../login");
 
 	useEffect(() => {
+
 		const fetchInfo = async () => {
 			await fetch("https://ntnu.site/api/member/info", {
 				method: "GET",
@@ -32,16 +31,17 @@ function Profile() {
 					console.log(err);
 				});
 		};
-		fetchInfo();
+
+		if (!cookies.jwt) navigate("../../login");
+		else fetchInfo();
+
 	}, []);
 
 	
-
-
 	return (
 		<div className="member-page">
 			<UserSidebar />
-			<div className="body-text">
+			<div className="body-text" style={{display: "flex", flexDirection: "column", justifyContent: "center"}}>
 				{profile && (
 					<ul style={{ listStyleType: `none` }}>
 						<li>帳號名稱：{profile.username}</li>

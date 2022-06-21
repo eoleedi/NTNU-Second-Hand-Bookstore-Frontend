@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useCookies } from 'react-cookie';
 import { Table } from 'react-bootstrap';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -14,11 +15,14 @@ function Product() {
 	const imageWidth  = imageHeight * 3 / 4;
 	const tableHeight = 240;
 
-	const [forSaleProducts, setForSaleProducts] = useState([]);
-	const [editingProducts, setEditingProducts] = useState([]);
-	const [soldOutProducts, setSoldOutProducts] = useState([]);
+	const [ forSaleProducts, setForSaleProducts ] = useState([]);
+	const [ editingProducts, setEditingProducts ] = useState([]);
+	const [ soldOutProducts, setSoldOutProducts ] = useState([]);
+
+	const [ cookies ] = useCookies();
 	const navigate = useNavigate();
 	
+
 	async function resetLists() {
 		await fetch("https://ntnu.site/api/member/products", {
 			method: "GET",
@@ -121,8 +125,12 @@ function Product() {
 			});
 	};
 
-	useEffect(() => { resetLists(); }, []);
+	useEffect(() => {
+		if (!cookies.jwt) navigate("../../login");
+		else resetLists();
+	}, []);
 
+	
 	return (
 		<div className="member-page">
 			<UserSidebar />
@@ -162,7 +170,7 @@ function Product() {
 							) : (
 								<tr style={{display: "block"}}>
 									<Row style={{marginLeft: 0, marginRight: 0}}>
-										<Col><td>暫無商品，請新增商品！</td></Col>
+										<Col><td>暫無已上架的商品！</td></Col>
 									</Row>
 								</tr>
 							)
@@ -247,7 +255,7 @@ function Product() {
 							) : (
 								<tr style={{display: "block"}}>
 									<Row style={{marginLeft: 0, marginRight: 0}}>
-										<Col><td>暫無商品，請新增商品!</td></Col>
+										<Col><td>暫無已售出的商品!</td></Col>
 									</Row>
 								</tr>
 							)

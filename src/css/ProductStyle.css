@@ -9,7 +9,6 @@
 }
 
 .SubContainer {
-    margin-bottom: 20px;
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
@@ -25,9 +24,9 @@
     align-items: center; 
 }
 
-/* .Word{
-    margin-top: 100px;
-} */
+.Word{
+    flex-grow: 1;
+}
 
 .ProductTitle {
     margin-top: 100;

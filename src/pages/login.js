@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useCookies } from 'react-cookie';
 import "../css/login.css";
 
 
 function page() {
 
-	const [username, setUsername] = useState('');
-	const [password, setPassword] = useState('');
+	const [ username, setUsername ] = useState('');
+	const [ password, setPassword ] = useState('');
+	const [ isLogin , setIsLogin  ] = useState(false);
+	const [ cookies ] = useCookies();
 	const navigate = useNavigate();
 
 	async function login() {
@@ -38,7 +41,9 @@ function page() {
 				}
 				else {
 					alert("登入成功！跳轉至個人頁面。")
+					setIsLogin(true);
 					navigate("../user");
+					window.location.reload();
 				}
 			})
 			.catch((error) => {
@@ -46,6 +51,13 @@ function page() {
 				// alert(error);
 			});
 	}
+
+	useEffect(() => {
+		if (!!cookies.jwt) {
+			setIsLogin(true);
+			navigate("../user");
+		}
+	}, [])
 
 
 	return (

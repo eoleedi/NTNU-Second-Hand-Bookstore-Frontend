@@ -1,10 +1,11 @@
 import React from 'react';
-import Topbar from "../components/Topbar";
 import "../css/card.css"
+import "../css/imagestyle.css";  //align picture
+
+
 const Contact = () => {
   return (
-      <div>
-      <Topbar />
+    <div className="index-page">
       <div align="center" style={{marginTop:"4%",marginBottom:"4%"}}>
         <div className="card-FR" id="basic" style={{ width: `900px`,height: `500px`} }>
           <div className="card-header" align="center" style={{background: '#CEBDBD'} } >
@@ -24,12 +25,13 @@ const Contact = () => {
             <h3>&emsp;&emsp;&emsp;&emsp;&emsp;......&emsp;&emsp;&emsp;&emsp;&emsp;<br/></h3>
             <h3>&emsp;&emsp;&emsp;&emsp;&emsp;......&emsp;&emsp;&emsp;&emsp;&emsp;<br/></h3>
             <div className="card-separator"/>
-           
-           </div>
+          
+          </div>
         </div>
       </div>
-      </div>
+    </div>
   );
 };
-  
+
+
 export default Contact;

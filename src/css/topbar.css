@@ -4,7 +4,7 @@
     background: #F3CDCD;
     display: flex;
     align-items: center; 
-    z-index: 0; /* Stay on top */
+    z-index: 3; /* Stay on top */
 	top: 0; /* Stay at the top */
 	left: -1;
 }
@@ -136,7 +136,6 @@
 
 .notification {
     position: relative;
-    z-index: 3;
     top: 210px;
     right: 600px;
     width: 500px;
